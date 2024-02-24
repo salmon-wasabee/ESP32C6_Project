@@ -1,6 +1,0 @@
-[0;33m--- esp-idf-monitor 1.4.0 on /dev/cu.usbmodem14201 115200 ---[0m
-[0;33m--- Quit: Ctrl+] | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H ---[0m
-[0;33m0x40802fce: rv_utils_wait_for_intr at /Users/senggee/esp/esp-idf/components/riscv/include/riscv/rv_utils.h:33
- (inlined by) esp_cpu_wait_for_intr at /Users/senggee/esp/esp-idf/components/esp_hw_support/cpu.c:119
-[0m
-[0m
