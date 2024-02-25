@@ -1,7 +1,7 @@
 {
     "version":            "1.1",
     "project_name":       "i2c_oled",
-    "project_version":    "b5e4cf6-dirty",
+    "project_version":    "bf3c701-dirty",
     "project_path":       "/Users/senggee/Desktop/IOT-EspressIF-ESP32-C6/i2c_oled",
     "idf_path":           "/Users/senggee/esp/esp-idf-v5.2",
     "build_dir":          "/Users/senggee/Desktop/IOT-EspressIF-ESP32-C6/i2c_oled/build",
@@ -2148,18 +2148,6 @@
             "managed_priv_reqs": [ "espressif__esp_lcd_sh1107", "espressif__esp_lvgl_port", "lvgl__lvgl" ],
             "include_dirs": [ "." ]
         },
-        "espressif__esp_lvgl_port": {
-            "alias": "idf::espressif__esp_lvgl_port",
-            "target": "___idf_espressif__esp_lvgl_port",
-            "prefix": "idf",
-            "dir": "/Users/senggee/Desktop/IOT-EspressIF-ESP32-C6/i2c_oled/managed_components/espressif__esp_lvgl_port",
-            "lib": "__idf_espressif__esp_lvgl_port",
-            "reqs": [ "esp_lcd", "lvgl__lvgl" ],
-            "priv_reqs": [ "esp_timer" ],
-            "managed_reqs": [ "lvgl__lvgl" ],
-            "managed_priv_reqs": [],
-            "include_dirs": [ "include" ]
-        },
         "espressif__esp_lcd_sh1107": {
             "alias": "idf::espressif__esp_lcd_sh1107",
             "target": "___idf_espressif__esp_lcd_sh1107",
@@ -2169,6 +2157,18 @@
             "reqs": [ "esp_lcd" ],
             "priv_reqs": [ "driver" ],
             "managed_reqs": [],
+            "managed_priv_reqs": [],
+            "include_dirs": [ "include" ]
+        },
+        "espressif__esp_lvgl_port": {
+            "alias": "idf::espressif__esp_lvgl_port",
+            "target": "___idf_espressif__esp_lvgl_port",
+            "prefix": "idf",
+            "dir": "/Users/senggee/Desktop/IOT-EspressIF-ESP32-C6/i2c_oled/managed_components/espressif__esp_lvgl_port",
+            "lib": "__idf_espressif__esp_lvgl_port",
+            "reqs": [ "esp_lcd", "lvgl__lvgl" ],
+            "priv_reqs": [ "esp_timer" ],
+            "managed_reqs": [ "lvgl__lvgl" ],
             "managed_priv_reqs": [],
             "include_dirs": [ "include" ]
         },

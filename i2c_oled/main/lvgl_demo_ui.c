@@ -8,6 +8,8 @@
 
 void example_lvgl_demo_ui(lv_disp_t *disp)
 {
+    // Set rotation to 180 degrees
+    lv_disp_set_rotation(disp, LV_DISP_ROT_180);
     lv_obj_t *scr = lv_disp_get_scr_act(disp);
     lv_obj_t *label = lv_label_create(scr);
     lv_label_set_long_mode(label, LV_LABEL_LONG_SCROLL_CIRCULAR); /* Circular scroll */
