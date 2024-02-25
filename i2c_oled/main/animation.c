@@ -41,12 +41,12 @@ void example_lvgl_siri_ui(lv_disp_t *disp) {
     lv_obj_t *scr = lv_disp_get_scr_act(disp);
 
     lv_obj_t *label1 = lv_label_create(scr);
-    lv_label_set_text(label1, "F.R.I.D.A.Y ");
+    lv_label_set_text(label1, "FRIDAY");
     lv_obj_align(label1, LV_ALIGN_TOP_MID, 0, 0);
 
     lv_obj_t *anim_container = lv_obj_create(scr);
-    lv_obj_set_size(anim_container, 128, 64); // Increased size for visibility
-    lv_obj_align(anim_container, LV_ALIGN_CENTER, 0, 0); // Center the container for visibility
+    lv_obj_set_size(anim_container, 50, 50); // Increased size for visibility
+    lv_obj_align(anim_container, LV_ALIGN_TOP_MID, 0, 10); // Center the container for visibility
 
     create_siri_waveform(anim_container);
 }
