@@ -1,7 +1,0 @@
-dependencies:
-  espressif/led_strip: "^2.0.0"
-  u8g2-hal-esp-idf: 
-    path: /Users/senggee/esp/blink/managed_components/u8g2-hal-esp-idf
-  u8g2: 
-    path: /Users/senggee/esp/blink/managed_components/u8g2
-
