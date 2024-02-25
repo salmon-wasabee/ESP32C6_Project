@@ -48,6 +48,8 @@ static const char *TAG = "example";
 #define EXAMPLE_LCD_PARAM_BITS         8
 
 extern void example_lvgl_demo_ui(lv_disp_t *disp);
+extern void example_lvgl_siri_ui(lv_disp_t *disp);
+// extern void animation(lv_disp_t *disp);
 
 /* The LVGL port component calls esp_lcd_panel_draw_bitmap API for send data to the screen. There must be called
 lvgl_port_flush_ready(disp) after each transaction to display. The best way is to use on_color_trans_done
@@ -143,7 +145,7 @@ void app_main(void)
     ESP_LOGI(TAG, "Display LVGL Scroll Text");
     // Lock the mutex due to the LVGL APIs are not thread-safe
     if (lvgl_port_lock(0)) {
-        example_lvgl_demo_ui(disp);
+        example_lvgl_siri_ui(disp);
         // Release the mutex
         lvgl_port_unlock();
     }
