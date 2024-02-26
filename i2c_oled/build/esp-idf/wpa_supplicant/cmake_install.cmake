@@ -1,4 +1,4 @@
-# Install script for directory: /Users/senggee/esp/esp-idf-v5.2/components/wpa_supplicant
+# Install script for directory: /Users/senggee/esp/esp-idf/components/wpa_supplicant
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

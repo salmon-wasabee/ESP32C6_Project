@@ -1,4 +1,4 @@
-# Install script for directory: /Users/senggee/Desktop/IOT-EspressIF-ESP32-C6/i2c_oled/managed_components/espressif__esp_lvgl_port
+# Install script for directory: /Users/senggee/esp/IOT-EspressIF-ESP32-C6/i2c_oled/managed_components/espressif__esp_lvgl_port
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

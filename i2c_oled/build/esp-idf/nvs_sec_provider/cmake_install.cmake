@@ -1,4 +1,4 @@
-# Install script for directory: /Users/senggee/esp/esp-idf-v5.2/components/nvs_sec_provider
+# Install script for directory: /Users/senggee/esp/esp-idf/components/nvs_sec_provider
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

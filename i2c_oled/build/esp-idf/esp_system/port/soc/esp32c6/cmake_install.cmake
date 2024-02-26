@@ -1,4 +1,4 @@
-# Install script for directory: /Users/senggee/esp/esp-idf-v5.2/components/esp_system/port/soc/esp32c6
+# Install script for directory: /Users/senggee/esp/esp-idf/components/esp_system/port/soc/esp32c6
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

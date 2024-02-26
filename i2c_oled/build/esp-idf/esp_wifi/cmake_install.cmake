@@ -1,4 +1,4 @@
-# Install script for directory: /Users/senggee/esp/esp-idf-v5.2/components/esp_wifi
+# Install script for directory: /Users/senggee/esp/esp-idf/components/esp_wifi
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

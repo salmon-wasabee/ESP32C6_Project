@@ -1,4 +1,4 @@
-# Install script for directory: /Users/senggee/esp/esp-idf-v5.2/components/esp_adc
+# Install script for directory: /Users/senggee/esp/esp-idf/components/esp_adc
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

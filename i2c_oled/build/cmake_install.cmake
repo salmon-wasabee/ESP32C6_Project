@@ -1,4 +1,4 @@
-# Install script for directory: /Users/senggee/Desktop/IOT-EspressIF-ESP32-C6/i2c_oled
+# Install script for directory: /Users/senggee/esp/IOT-EspressIF-ESP32-C6/i2c_oled
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,7 +39,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/Users/senggee/Desktop/IOT-EspressIF-ESP32-C6/i2c_oled/build/esp-idf/cmake_install.cmake")
+  include("/Users/senggee/esp/IOT-EspressIF-ESP32-C6/i2c_oled/build/esp-idf/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/senggee/Desktop/IOT-EspressIF-ESP32-C6/i2c_oled/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/senggee/esp/IOT-EspressIF-ESP32-C6/i2c_oled/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

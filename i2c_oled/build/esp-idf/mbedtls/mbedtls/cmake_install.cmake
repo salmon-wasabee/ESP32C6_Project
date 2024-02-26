@@ -1,4 +1,4 @@
-# Install script for directory: /Users/senggee/esp/esp-idf-v5.2/components/mbedtls/mbedtls
+# Install script for directory: /Users/senggee/esp/esp-idf/components/mbedtls/mbedtls
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,9 +39,9 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/Users/senggee/Desktop/IOT-EspressIF-ESP32-C6/i2c_oled/build/esp-idf/mbedtls/mbedtls/include/cmake_install.cmake")
-  include("/Users/senggee/Desktop/IOT-EspressIF-ESP32-C6/i2c_oled/build/esp-idf/mbedtls/mbedtls/3rdparty/cmake_install.cmake")
-  include("/Users/senggee/Desktop/IOT-EspressIF-ESP32-C6/i2c_oled/build/esp-idf/mbedtls/mbedtls/library/cmake_install.cmake")
+  include("/Users/senggee/esp/IOT-EspressIF-ESP32-C6/i2c_oled/build/esp-idf/mbedtls/mbedtls/include/cmake_install.cmake")
+  include("/Users/senggee/esp/IOT-EspressIF-ESP32-C6/i2c_oled/build/esp-idf/mbedtls/mbedtls/3rdparty/cmake_install.cmake")
+  include("/Users/senggee/esp/IOT-EspressIF-ESP32-C6/i2c_oled/build/esp-idf/mbedtls/mbedtls/library/cmake_install.cmake")
 
 endif()
 

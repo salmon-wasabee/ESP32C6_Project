@@ -1,4 +1,4 @@
-# Install script for directory: /Users/senggee/esp/esp-idf-v5.2/components/esp_system/port
+# Install script for directory: /Users/senggee/esp/esp-idf/components/esp_system/port
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,6 +39,6 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/Users/senggee/Desktop/IOT-EspressIF-ESP32-C6/i2c_oled/build/esp-idf/esp_system/port/soc/esp32c6/cmake_install.cmake")
+  include("/Users/senggee/esp/IOT-EspressIF-ESP32-C6/i2c_oled/build/esp-idf/esp_system/port/soc/esp32c6/cmake_install.cmake")
 endif()
 
