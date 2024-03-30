@@ -1,4 +1,7 @@
 # IOT-EspressIF-ESP32-C6
+
+![IMG_4330](https://github.com/salmon-wasabee/IOT-EspressIF-ESP32-C6/assets/73149628/c94ba7c9-3d6f-441a-9803-468bcf9d4552)
+
 IOT EspressIF ESP32-C6
 Creating a smart automation system with cloud-connected IoT using the Espressif ESP32-C6 for your project involves several steps, including setting up the development environment, programming the device, and integrating it with the ESP RainMaker platform. Given the project's objectives and deliverables, here's a step-by-step guide tailored for a single-member group:
 1. Setting Up the Development Environment
