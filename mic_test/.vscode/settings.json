@@ -4,5 +4,9 @@
     "idf.openOcdConfigs": [
         "board/esp32c6-bridge.cfg"
     ],
-    "idf.flashType": "UART"
+    "idf.flashType": "UART",
+    "files.associations": {
+        "i2s_std.h": "c",
+        "esp_system.h": "c"
+    }
 }
