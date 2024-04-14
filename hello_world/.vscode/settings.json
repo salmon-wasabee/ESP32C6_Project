@@ -1,4 +1,0 @@
-{
-    "idf.adapterTargetName": "esp32c6",
-    "idf.port": "/dev/cu.SLAB_USBtoUART"
-}
