@@ -1,7 +1,7 @@
 {
     "version":            "1.1",
     "project_name":       "i2c_oled",
-    "project_version":    "12b940cb-dirty",
+    "project_version":    "0957579d-dirty",
     "project_path":       "/Users/senggee/esp/ESP32C6_Projects/project_1_i2c_oled",
     "idf_path":           "/Users/senggee/esp/esp-idf",
     "build_dir":          "/Users/senggee/esp/ESP32C6_Projects/project_1_i2c_oled/build",
@@ -2148,18 +2148,6 @@
             "managed_priv_reqs": [ "espressif__esp_lcd_sh1107", "espressif__esp_lvgl_port", "lvgl__lvgl" ],
             "include_dirs": [ "." ]
         },
-        "lvgl__lvgl": {
-            "alias": "idf::lvgl__lvgl",
-            "target": "___idf_lvgl__lvgl",
-            "prefix": "idf",
-            "dir": "/Users/senggee/esp/ESP32C6_Projects/project_1_i2c_oled/managed_components/lvgl__lvgl",
-            "lib": "__idf_lvgl__lvgl",
-            "reqs": [ "esp_timer" ],
-            "priv_reqs": [],
-            "managed_reqs": [],
-            "managed_priv_reqs": [],
-            "include_dirs": [ "/Users/senggee/esp/ESP32C6_Projects/project_1_i2c_oled/managed_components/lvgl__lvgl", "/Users/senggee/esp/ESP32C6_Projects/project_1_i2c_oled/managed_components/lvgl__lvgl/src", "/Users/senggee/esp/ESP32C6_Projects/project_1_i2c_oled/managed_components/lvgl__lvgl/../", "/Users/senggee/esp/ESP32C6_Projects/project_1_i2c_oled/managed_components/lvgl__lvgl/examples", "/Users/senggee/esp/ESP32C6_Projects/project_1_i2c_oled/managed_components/lvgl__lvgl/demos" ]
-        },
         "espressif__esp_lvgl_port": {
             "alias": "idf::espressif__esp_lvgl_port",
             "target": "___idf_espressif__esp_lvgl_port",
@@ -2171,6 +2159,18 @@
             "managed_reqs": [ "lvgl__lvgl" ],
             "managed_priv_reqs": [],
             "include_dirs": [ "include" ]
+        },
+        "lvgl__lvgl": {
+            "alias": "idf::lvgl__lvgl",
+            "target": "___idf_lvgl__lvgl",
+            "prefix": "idf",
+            "dir": "/Users/senggee/esp/ESP32C6_Projects/project_1_i2c_oled/managed_components/lvgl__lvgl",
+            "lib": "__idf_lvgl__lvgl",
+            "reqs": [ "esp_timer" ],
+            "priv_reqs": [],
+            "managed_reqs": [],
+            "managed_priv_reqs": [],
+            "include_dirs": [ "/Users/senggee/esp/ESP32C6_Projects/project_1_i2c_oled/managed_components/lvgl__lvgl", "/Users/senggee/esp/ESP32C6_Projects/project_1_i2c_oled/managed_components/lvgl__lvgl/src", "/Users/senggee/esp/ESP32C6_Projects/project_1_i2c_oled/managed_components/lvgl__lvgl/../", "/Users/senggee/esp/ESP32C6_Projects/project_1_i2c_oled/managed_components/lvgl__lvgl/examples", "/Users/senggee/esp/ESP32C6_Projects/project_1_i2c_oled/managed_components/lvgl__lvgl/demos" ]
         },
         "espressif__esp_lcd_sh1107": {
             "alias": "idf::espressif__esp_lcd_sh1107",

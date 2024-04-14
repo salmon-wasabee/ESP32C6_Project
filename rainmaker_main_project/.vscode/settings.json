@@ -1,0 +1,11 @@
+{
+    "idf.flashType": "UART",
+    "idf.port": "/dev/cu.SLAB_USBtoUART",
+    "idf.adapterTargetName": "esp32c6",
+    "idf.openOcdConfigs": [
+        "board/esp32c6-bridge.cfg"
+    ],
+    "files.associations": {
+        "app_priv.h": "c"
+    }
+}
