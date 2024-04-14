@@ -1,0 +1,12 @@
+{
+  "C_Cpp.intelliSenseEngine": "default",
+  "idf.port": "/dev/cu.SLAB_USBtoUART",
+  "idf.adapterTargetName": "esp32c6",
+  "idf.openOcdConfigs": [
+    "board/esp32c6-bridge.cfg"
+  ],
+  "idf.flashType": "UART",
+  "files.associations": {
+    "cstdint": "c"
+  }
+}
