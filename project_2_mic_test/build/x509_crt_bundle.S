@@ -1,4 +1,4 @@
-/* * Data converted from /Users/senggee/esp/IOT-EspressIF-ESP32-C6/mic_test/build/esp-idf/mbedtls/x509_crt_bundle
+/* * Data converted from /Users/senggee/esp/ESP32C6_Projects/project_2_mic_test/build/esp-idf/mbedtls/x509_crt_bundle
  */
 .data
 .section .rodata.embedded

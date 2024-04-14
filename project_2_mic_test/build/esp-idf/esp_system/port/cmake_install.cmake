@@ -39,6 +39,6 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/Users/senggee/esp/IOT-EspressIF-ESP32-C6/mic_test/build/esp-idf/esp_system/port/soc/esp32c6/cmake_install.cmake")
+  include("/Users/senggee/esp/ESP32C6_Projects/project_2_mic_test/build/esp-idf/esp_system/port/soc/esp32c6/cmake_install.cmake")
 endif()
 

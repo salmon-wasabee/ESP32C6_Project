@@ -1,4 +1,4 @@
-/* * Data converted from /Users/senggee/esp/IOT-EspressIF-ESP32-C6/mic_test/certs/google_cloud_cert.pem
+/* * Data converted from /Users/senggee/esp/ESP32C6_Projects/project_2_mic_test/certs/google_cloud_cert.pem
  */
 .data
 .section .rodata.embedded
