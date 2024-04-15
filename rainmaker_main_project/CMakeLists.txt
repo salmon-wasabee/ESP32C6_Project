@@ -9,7 +9,7 @@ else()
 endif(DEFINED ENV{RMAKER_PATH})
 
 # Add RainMaker components and other common application components
-set(EXTRA_COMPONENT_DIRS ${RMAKER_PATH}/components/esp-insights/components ${RMAKER_PATH}/components ${RMAKER_PATH}/ESP32C6_Projects/common)
+set(EXTRA_COMPONENT_DIRS ${RMAKER_PATH}/components/esp-insights/components ${RMAKER_PATH}/components ${RMAKER_PATH}/ESP32C6_Project/common)
 set(PROJECT_VER "1.0")
 include($ENV{IDF_PATH}/tools/cmake/project.cmake)
 project(multi_device)

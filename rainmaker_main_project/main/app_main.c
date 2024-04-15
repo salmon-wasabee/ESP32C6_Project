@@ -59,7 +59,7 @@ static const char *TAG = "app_main";
 #define EXAMPLE_LCD_PARAM_BITS         8
 
 extern void jarvis_ui(lv_disp_t *disp);
-extern void mic_test();
+// extern void mic_test();
 // extern void animation(lv_disp_t *disp);
 
 static bool notify_lvgl_flush_ready(esp_lcd_panel_io_handle_t panel_io, esp_lcd_panel_io_event_data_t *edata, void *user_ctx)
@@ -199,7 +199,7 @@ void app_main()
     }
     ESP_ERROR_CHECK( err );
     initialize_lcd_and_lvgl();
-    mic_test();
+    // mic_test();
     /* Initialize Wi-Fi. Note that, this should be called before esp_rmaker_node_init()
      */
     app_wifi_init();

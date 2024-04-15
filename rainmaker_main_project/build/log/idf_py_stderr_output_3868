@@ -1,0 +1,5 @@
+warning: The int symbol LV_USE_FS_STDIO (defined at /Users/senggee/esp/components/lvgl/Kconfig:788) is being evaluated in a logical context somewhere. It will always evaluate to n.
+warning: The int symbol LV_USE_FS_POSIX (defined at /Users/senggee/esp/components/lvgl/Kconfig:795) is being evaluated in a logical context somewhere. It will always evaluate to n.
+warning: The int symbol LV_USE_FS_WIN32 (defined at /Users/senggee/esp/components/lvgl/Kconfig:802) is being evaluated in a logical context somewhere. It will always evaluate to n.
+ESP Insights Project commit: HEAD-HASH-NOTFOUND
+ESP RainMaker Project commit: HEAD-HASH-NOTFOUND
