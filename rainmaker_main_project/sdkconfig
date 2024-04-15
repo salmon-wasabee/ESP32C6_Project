@@ -2478,13 +2478,6 @@ CONFIG_ESP_LCD_TOUCH_MAX_BUTTONS=1
 # end of ESP LCD TOUCH
 
 #
-# ESP Secure Cert Manager
-#
-CONFIG_ESP_SECURE_CERT_DS_PERIPHERAL=y
-# CONFIG_ESP_SECURE_CERT_SUPPORT_LEGACY_FORMATS is not set
-# end of ESP Secure Cert Manager
-
-#
 # mDNS
 #
 CONFIG_MDNS_MAX_INTERFACES=3
@@ -2512,6 +2505,13 @@ CONFIG_MDNS_PREDEF_NETIF_AP=y
 CONFIG_MDNS_PREDEF_NETIF_ETH=y
 # end of MDNS Predefined interfaces
 # end of mDNS
+
+#
+# ESP Secure Cert Manager
+#
+CONFIG_ESP_SECURE_CERT_DS_PERIPHERAL=y
+# CONFIG_ESP_SECURE_CERT_SUPPORT_LEGACY_FORMATS is not set
+# end of ESP Secure Cert Manager
 # end of Component config
 
 # CONFIG_IDF_EXPERIMENTAL_FEATURES is not set
