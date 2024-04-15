@@ -48,7 +48,6 @@
 /Users/senggee/esp/ESP32C6_Project/rainmaker_main_project/build/esp-idf/esp_http_client/libesp_http_client.a
 /Users/senggee/esp/ESP32C6_Project/rainmaker_main_project/build/esp-idf/esp_http_server/libesp_http_server.a
 /Users/senggee/esp/ESP32C6_Project/rainmaker_main_project/build/esp-idf/esp_https_ota/libesp_https_ota.a
-/Users/senggee/esp/ESP32C6_Project/rainmaker_main_project/build/esp-idf/esp_https_server/libesp_https_server.a
 /Users/senggee/esp/ESP32C6_Project/rainmaker_main_project/build/esp-idf/esp_lcd/libesp_lcd.a
 /Users/senggee/esp/ESP32C6_Project/rainmaker_main_project/build/esp-idf/protobuf-c/libprotobuf-c.a
 /Users/senggee/esp/ESP32C6_Project/rainmaker_main_project/build/esp-idf/protocomm/libprotocomm.a

@@ -8025,7 +8025,10 @@
                                                 "help": "Maximum GATT Server Profiles Count",
                                                 "id": "BT_GATT_MAX_SR_PROFILES",
                                                 "name": "BT_GATT_MAX_SR_PROFILES",
-                                                "range": null,
+                                                "range": [
+                                                    1,
+                                                    32
+                                                ],
                                                 "title": "Max GATT Server Profiles",
                                                 "type": "int"
                                             },
@@ -8035,7 +8038,10 @@
                                                 "help": "Maximum GATT Service Attributes Count",
                                                 "id": "BT_GATT_MAX_SR_ATTRIBUTES",
                                                 "name": "BT_GATT_MAX_SR_ATTRIBUTES",
-                                                "range": null,
+                                                "range": [
+                                                    1,
+                                                    500
+                                                ],
                                                 "title": "Max GATT Service Attributes",
                                                 "type": "int"
                                             },
@@ -8126,7 +8132,10 @@
                                                 "help": "Maximum GATTC cache characteristic count",
                                                 "id": "BT_GATTC_MAX_CACHE_CHAR",
                                                 "name": "BT_GATTC_MAX_CACHE_CHAR",
-                                                "range": null,
+                                                "range": [
+                                                    1,
+                                                    500
+                                                ],
                                                 "title": "Max gattc cache characteristic for discover",
                                                 "type": "int"
                                             },
@@ -8136,7 +8145,10 @@
                                                 "help": "Maximum GATTC notify(indication) register number",
                                                 "id": "BT_GATTC_NOTIF_REG_MAX",
                                                 "name": "BT_GATTC_NOTIF_REG_MAX",
-                                                "range": null,
+                                                "range": [
+                                                    1,
+                                                    64
+                                                ],
                                                 "title": "Max gattc notify(indication) register number",
                                                 "type": "int"
                                             },
@@ -8156,7 +8168,10 @@
                                                 "help": "The number of attempts to reconnect if the connection establishment failed",
                                                 "id": "BT_GATTC_CONNECT_RETRY_COUNT",
                                                 "name": "BT_GATTC_CONNECT_RETRY_COUNT",
-                                                "range": null,
+                                                "range": [
+                                                    0,
+                                                    7
+                                                ],
                                                 "title": "The number of attempts to reconnect if the connection establishment failed",
                                                 "type": "int"
                                             }
@@ -10113,7 +10128,10 @@
                                 "help": "Maximum BT/BLE connection count. The ESP32-C3/S3 chip supports a maximum of 10 instances,\nincluding ADV, SCAN and connections. The ESP32-C3/S3 chip can connect up to 9 devices if\nADV or SCAN uses only one. If ADV and SCAN are both used, The ESP32-C3/S3 chip is connected\nto a maximum of 8 devices. Because Bluetooth cannot reclaim used instances once ADV or SCAN\nis used.",
                                 "id": "BT_ACL_CONNECTIONS",
                                 "name": "BT_ACL_CONNECTIONS",
-                                "range": null,
+                                "range": [
+                                    1,
+                                    9
+                                ],
                                 "title": "BT/BLE MAX ACL CONNECTIONS(1~9)",
                                 "type": "int"
                             },
@@ -10173,7 +10191,10 @@
                                 "help": "The number of security records for peer devices.",
                                 "id": "BT_SMP_MAX_BONDS",
                                 "name": "BT_SMP_MAX_BONDS",
-                                "range": null,
+                                "range": [
+                                    1,
+                                    32
+                                ],
                                 "title": "BT/BLE maximum bond device count",
                                 "type": "int"
                             },
@@ -10193,7 +10214,10 @@
                                 "help": "Bluetooth Connection establishment maximum time, if connection time exceeds this value, the connection\nestablishment fails, ESP_GATTC_OPEN_EVT or ESP_GATTS_OPEN_EVT is triggered.",
                                 "id": "BT_BLE_ESTAB_LINK_CONN_TOUT",
                                 "name": "BT_BLE_ESTAB_LINK_CONN_TOUT",
-                                "range": null,
+                                "range": [
+                                    1,
+                                    60
+                                ],
                                 "title": "Timeout of BLE connection establishment",
                                 "type": "int"
                             },
@@ -10203,7 +10227,10 @@
                                 "help": "Bluetooth Device name length shall be no larger than 248 octets, If the broadcast data cannot contain\nthe complete device name, then only the shortname will be displayed, the rest parts that can't fit in\nwill be truncated.",
                                 "id": "BT_MAX_DEVICE_NAME_LEN",
                                 "name": "BT_MAX_DEVICE_NAME_LEN",
-                                "range": null,
+                                "range": [
+                                    32,
+                                    248
+                                ],
                                 "title": "length of bluetooth device name",
                                 "type": "int"
                             },
@@ -10223,7 +10250,10 @@
                                 "help": "This set RPA timeout of Controller and Host.\nDefault is 900 s (15 minutes). Range is 1 s to 1 hour (3600 s).",
                                 "id": "BT_BLE_RPA_TIMEOUT",
                                 "name": "BT_BLE_RPA_TIMEOUT",
-                                "range": null,
+                                "range": [
+                                    1,
+                                    3600
+                                ],
                                 "title": "Timeout of resolvable private address",
                                 "type": "int"
                             },
@@ -10421,10 +10451,7 @@
                                 "help": "Defines maximum number of concurrent BLE connections. For ESP32, user\nis expected to configure BTDM_CTRL_BLE_MAX_CONN from controller menu\nalong with this option. Similarly for ESP32-C3 or ESP32-S3, user is expected to\nconfigure BT_CTRL_BLE_MAX_ACT from controller menu.\nFor ESP32C2, ESP32C6 and ESP32H2, each connection will take about 1k DRAM.",
                                 "id": "BT_NIMBLE_MAX_CONNECTIONS",
                                 "name": "BT_NIMBLE_MAX_CONNECTIONS",
-                                "range": [
-                                    1,
-                                    70
-                                ],
+                                "range": null,
                                 "title": "Maximum number of concurrent connections",
                                 "type": "int"
                             },
@@ -10454,10 +10481,7 @@
                                 "help": "Defines maximum number of BLE Connection Oriented Channels. When set to (0), BLE COC is not compiled in",
                                 "id": "BT_NIMBLE_L2CAP_COC_MAX_NUM",
                                 "name": "BT_NIMBLE_L2CAP_COC_MAX_NUM",
-                                "range": [
-                                    0,
-                                    9
-                                ],
+                                "range": null,
                                 "title": "Maximum number of connection oriented channels",
                                 "type": "int"
                             },
@@ -10849,10 +10873,7 @@
                                 "help": "Time interval between RPA address change. This is applicable in case of\nHost based RPA",
                                 "id": "BT_NIMBLE_RPA_TIMEOUT",
                                 "name": "BT_NIMBLE_RPA_TIMEOUT",
-                                "range": [
-                                    1,
-                                    41400
-                                ],
+                                "range": null,
                                 "title": "RPA timeout in seconds",
                                 "type": "int"
                             },
@@ -11017,10 +11038,7 @@
                                         "help": "Defines maximum number of connection reattempts.",
                                         "id": "BT_NIMBLE_MAX_CONN_REATTEMPT",
                                         "name": "BT_NIMBLE_MAX_CONN_REATTEMPT",
-                                        "range": [
-                                            1,
-                                            7
-                                        ],
+                                        "range": null,
                                         "title": "Maximum number connection reattempts",
                                         "type": "int"
                                     }
@@ -11113,10 +11131,7 @@
                                         "help": "Set this option to set the upper limit for number of periodic sync\nconnections. This should be less than maximum connections allowed by\ncontroller.",
                                         "id": "BT_NIMBLE_MAX_PERIODIC_SYNCS",
                                         "name": "BT_NIMBLE_MAX_PERIODIC_SYNCS",
-                                        "range": [
-                                            0,
-                                            8
-                                        ],
+                                        "range": null,
                                         "title": "Maximum number of periodic advertising syncs",
                                         "type": "int"
                                     },
@@ -11126,10 +11141,7 @@
                                         "help": "Set this option to set the upper limit for number of periodic advertiser list.",
                                         "id": "BT_NIMBLE_MAX_PERIODIC_ADVERTISER_LIST",
                                         "name": "BT_NIMBLE_MAX_PERIODIC_ADVERTISER_LIST",
-                                        "range": [
-                                            1,
-                                            5
-                                        ],
+                                        "range": null,
                                         "title": "Maximum number of periodic advertiser list",
                                         "type": "int"
                                     },
@@ -11221,10 +11233,7 @@
                                 "help": "BLE list size",
                                 "id": "BT_NIMBLE_WHITELIST_SIZE",
                                 "name": "BT_NIMBLE_WHITELIST_SIZE",
-                                "range": [
-                                    1,
-                                    15
-                                ],
+                                "range": null,
                                 "title": "BLE white list size",
                                 "type": "int"
                             },
@@ -12040,7 +12049,10 @@
                                                 "help": "Change this option to set maximum number of extended advertising\ninstances. Minimum there is always one instance of\nadvertising. Enter how many more advertising instances you\nwant.\nEach extended advertising instance will take about 0.5k DRAM.",
                                                 "id": "BT_LE_MAX_EXT_ADV_INSTANCES",
                                                 "name": "BT_LE_MAX_EXT_ADV_INSTANCES",
-                                                "range": null,
+                                                "range": [
+                                                    0,
+                                                    4
+                                                ],
                                                 "title": "Maximum number of extended advertising instances.",
                                                 "type": "int"
                                             },
@@ -12050,7 +12062,10 @@
                                                 "help": "Defines the length of the extended adv data. The value should not\nexceed 1650.",
                                                 "id": "BT_LE_EXT_ADV_MAX_SIZE",
                                                 "name": "BT_LE_EXT_ADV_MAX_SIZE",
-                                                "range": null,
+                                                "range": [
+                                                    0,
+                                                    1650
+                                                ],
                                                 "title": "Maximum length of the advertising data.",
                                                 "type": "int"
                                             },
@@ -12090,7 +12105,10 @@
                                         "help": "Set this option to set the upper limit for number of periodic sync\nconnections. This should be less than maximum connections allowed by\ncontroller.",
                                         "id": "BT_LE_MAX_PERIODIC_SYNCS",
                                         "name": "BT_LE_MAX_PERIODIC_SYNCS",
-                                        "range": null,
+                                        "range": [
+                                            0,
+                                            8
+                                        ],
                                         "title": "Maximum number of periodic advertising syncs",
                                         "type": "int"
                                     },
@@ -12100,7 +12118,10 @@
                                         "help": "Set this option to set the upper limit for number of periodic advertiser list.",
                                         "id": "BT_LE_MAX_PERIODIC_ADVERTISER_LIST",
                                         "name": "BT_LE_MAX_PERIODIC_ADVERTISER_LIST",
-                                        "range": null,
+                                        "range": [
+                                            1,
+                                            5
+                                        ],
                                         "title": "Maximum number of periodic advertiser list",
                                         "type": "int"
                                     },
@@ -12396,7 +12417,10 @@
                                 "help": "BLE list size",
                                 "id": "BT_LE_WHITELIST_SIZE",
                                 "name": "BT_LE_WHITELIST_SIZE",
-                                "range": null,
+                                "range": [
+                                    1,
+                                    15
+                                ],
                                 "title": "BLE white list size",
                                 "type": "int"
                             },
@@ -12432,7 +12456,10 @@
                                 "help": "Defines maximum number of concurrent BLE connections. For ESP32, user\nis expected to configure BTDM_CTRL_BLE_MAX_CONN from controller menu\nalong with this option. Similarly for ESP32-C3 or ESP32-S3, user is expected to\nconfigure BT_CTRL_BLE_MAX_ACT from controller menu.\nEach connection will take about 1k DRAM.",
                                 "id": "BT_LE_MAX_CONNECTIONS",
                                 "name": "BT_LE_MAX_CONNECTIONS",
-                                "range": null,
+                                "range": [
+                                    1,
+                                    70
+                                ],
                                 "title": "Maximum number of concurrent connections",
                                 "type": "int"
                             },
@@ -30841,6 +30868,34 @@
                 "children": [
                     {
                         "children": [],
+                        "depends_on": "!IDF_TARGET_ESP32 && !IDF_TARGET_ESP32C2",
+                        "help": "Enable the DS peripheral support. Not supported on esp32 and esp32c2.",
+                        "id": "ESP_SECURE_CERT_DS_PERIPHERAL",
+                        "name": "ESP_SECURE_CERT_DS_PERIPHERAL",
+                        "range": null,
+                        "title": "Enable DS peripheral support",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "This option enables support for the legacy formats along with\nthe current format in the esp_secure_cert component.\nThe current format is\ncust_flash_tlv\nThe legacy formats are as follows:\ncust_flash\nnvs",
+                        "id": "ESP_SECURE_CERT_SUPPORT_LEGACY_FORMATS",
+                        "name": "ESP_SECURE_CERT_SUPPORT_LEGACY_FORMATS",
+                        "range": null,
+                        "title": "Enable support for legacy formats",
+                        "type": "bool"
+                    }
+                ],
+                "depends_on": null,
+                "id": "component-config-esp-secure-cert-manager",
+                "title": "ESP Secure Cert Manager",
+                "type": "menu"
+            },
+            {
+                "children": [
+                    {
+                        "children": [],
                         "depends_on": null,
                         "help": null,
                         "id": "ESP_LCD_TOUCH_MAX_POINTS",
@@ -31110,34 +31165,6 @@
                 "depends_on": null,
                 "id": "component-config-mdns",
                 "title": "mDNS",
-                "type": "menu"
-            },
-            {
-                "children": [
-                    {
-                        "children": [],
-                        "depends_on": "!IDF_TARGET_ESP32 && !IDF_TARGET_ESP32C2",
-                        "help": "Enable the DS peripheral support. Not supported on esp32 and esp32c2.",
-                        "id": "ESP_SECURE_CERT_DS_PERIPHERAL",
-                        "name": "ESP_SECURE_CERT_DS_PERIPHERAL",
-                        "range": null,
-                        "title": "Enable DS peripheral support",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "This option enables support for the legacy formats along with\nthe current format in the esp_secure_cert component.\nThe current format is\ncust_flash_tlv\nThe legacy formats are as follows:\ncust_flash\nnvs",
-                        "id": "ESP_SECURE_CERT_SUPPORT_LEGACY_FORMATS",
-                        "name": "ESP_SECURE_CERT_SUPPORT_LEGACY_FORMATS",
-                        "range": null,
-                        "title": "Enable support for legacy formats",
-                        "type": "bool"
-                    }
-                ],
-                "depends_on": null,
-                "id": "component-config-esp-secure-cert-manager",
-                "title": "ESP Secure Cert Manager",
                 "type": "menu"
             }
         ],
