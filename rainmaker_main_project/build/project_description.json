@@ -2661,18 +2661,6 @@
             "managed_priv_reqs": [],
             "include_dirs": [ "include" ]
         },
-        "espressif__cbor": {
-            "alias": "idf::espressif__cbor",
-            "target": "___idf_espressif__cbor",
-            "prefix": "idf",
-            "dir": "/Users/senggee/esp/ESP32C6_Project/rainmaker_main_project/managed_components/espressif__cbor",
-            "lib": "__idf_espressif__cbor",
-            "reqs": [],
-            "priv_reqs": [],
-            "managed_reqs": [],
-            "managed_priv_reqs": [],
-            "include_dirs": [ "port/include" ]
-        },
         "espressif__esp_lcd_touch": {
             "alias": "idf::espressif__esp_lcd_touch",
             "target": "___idf_espressif__esp_lcd_touch",
@@ -2696,6 +2684,18 @@
             "managed_reqs": [],
             "managed_priv_reqs": [],
             "include_dirs": [ "include" ]
+        },
+        "espressif__cbor": {
+            "alias": "idf::espressif__cbor",
+            "target": "___idf_espressif__cbor",
+            "prefix": "idf",
+            "dir": "/Users/senggee/esp/ESP32C6_Project/rainmaker_main_project/managed_components/espressif__cbor",
+            "lib": "__idf_espressif__cbor",
+            "reqs": [],
+            "priv_reqs": [],
+            "managed_reqs": [],
+            "managed_priv_reqs": [],
+            "include_dirs": [ "port/include" ]
         }
     },
     "debug_prefix_map_gdbinit": ""
