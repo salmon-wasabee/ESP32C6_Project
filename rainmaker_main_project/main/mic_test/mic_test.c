@@ -12,7 +12,7 @@
 #define I2S_NUM (I2S_NUM_0)
 
 double db = 0.0;
-char db_str[20]="";
+char db_str[20];
 
 i2s_config_t i2s_config = {
     .mode = I2S_MODE_MASTER | I2S_MODE_RX,
