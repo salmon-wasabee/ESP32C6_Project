@@ -3473,6 +3473,16 @@
         "children": [],
         "depends_on": null,
         "help": null,
+        "id": "SOC_CAPS_NO_RESET_BY_ANA_BOD",
+        "name": "SOC_CAPS_NO_RESET_BY_ANA_BOD",
+        "range": null,
+        "title": null,
+        "type": "bool"
+    },
+    {
+        "children": [],
+        "depends_on": null,
+        "help": null,
         "id": "IDF_CMAKE",
         "name": "IDF_CMAKE",
         "range": null,
@@ -3904,17 +3914,17 @@
                     },
                     {
                         "children": [],
-                        "depends_on": "<choice BOOTLOADER_COMPILER_OPTIMIZATION>",
+                        "depends_on": "(IDF_TARGET_ARCH_XTENSA || IDF_TARGET_ESP32C3 || IDF_TARGET_ESP32C2) && <choice BOOTLOADER_COMPILER_OPTIMIZATION>",
                         "help": null,
                         "id": "BOOTLOADER_COMPILER_OPTIMIZATION_NONE",
                         "name": "BOOTLOADER_COMPILER_OPTIMIZATION_NONE",
                         "range": null,
-                        "title": "Debug without optimization (-O0)",
+                        "title": "Debug without optimization (-O0) (Deprecated, will be removed in IDF v6.0)",
                         "type": "bool"
                     }
                 ],
                 "depends_on": null,
-                "help": "This option sets compiler optimization level (gcc -O argument)\nfor the bootloader.\n\n- The default \"Size\" setting will add the -0s flag to CFLAGS.\n- The \"Debug\" setting will add the -Og flag to CFLAGS.\n- The \"Performance\" setting will add the -O2 flag to CFLAGS.\n- The \"None\" setting will add the -O0 flag to CFLAGS.\n\nNote that custom optimization levels may be unsupported.",
+                "help": "This option sets compiler optimization level (gcc -O argument)\nfor the bootloader.\n\n- The default \"Size\" setting will add the -0s flag to CFLAGS.\n- The \"Debug\" setting will add the -Og flag to CFLAGS.\n- The \"Performance\" setting will add the -O2 flag to CFLAGS.\n\nNote that custom optimization levels may be unsupported.",
                 "id": "bootloader-config-bootloader-optimization-level",
                 "name": "BOOTLOADER_COMPILER_OPTIMIZATION",
                 "title": "Bootloader optimization Level",
@@ -4388,6 +4398,16 @@
             },
             {
                 "children": [
+                    {
+                        "children": [],
+                        "depends_on": "BOOTLOADER_CUSTOM_RESERVE_RTC",
+                        "help": "This option allows the customer to use the legacy bootloader behavior when the\nRTC FAST memory CRC calculation takes place. When this option is enabled, the\nallocated user custom data will be taken into account in the CRC calculcation.\nThis means that any change to the custom data would need a CRC update to prevent\nthe bootloader from marking this data as corrupted.\nIf this option is disabled, the custom data will not be taken into account when\ncalculating the RTC FAST memory CRC. The user custom data can be changed freely,\nwithout the need to update the CRC.\nTHIS OPTION MUST BE THE SAME FOR BOTH THE BOOTLOADER AND THE APPLICATION BUILDS.",
+                        "id": "BOOTLOADER_CUSTOM_RESERVE_RTC_IN_CRC",
+                        "name": "BOOTLOADER_CUSTOM_RESERVE_RTC_IN_CRC",
+                        "range": null,
+                        "title": "Include custom memory in the CRC calculation",
+                        "type": "bool"
+                    },
                     {
                         "children": [],
                         "depends_on": "BOOTLOADER_CUSTOM_RESERVE_RTC",
@@ -4985,6 +5005,16 @@
                 "id": "security-features-potentially-insecure-options",
                 "title": "Potentially insecure options",
                 "type": "menu"
+            },
+            {
+                "children": [],
+                "depends_on": "SECURE_FLASH_ENC_ENABLED && !SECURE_FLASH_REQUIRE_ALREADY_ENABLED",
+                "help": "If set, optimise encryption time for the partition of type APP,\nby only encrypting the app image that is present in the partition,\ninstead of the whole partition.\nThe image length used for encryption is derived from the image metadata, which\nincludes the size of the app image, checksum, hash and also the signature sector\nwhen secure boot is enabled.\n\nIf not set (default), the whole partition of type APP would be encrypted,\nwhich increases the encryption time but might be useful if there\nis any custom data appended to the firmware image.",
+                "id": "SECURE_FLASH_ENCRYPT_ONLY_IMAGE_LEN_IN_APP_PART",
+                "name": "SECURE_FLASH_ENCRYPT_ONLY_IMAGE_LEN_IN_APP_PART",
+                "range": null,
+                "title": "Encrypt only the app image that is present in the partition of type app",
+                "type": "bool"
             },
             {
                 "children": [],
@@ -7663,7 +7693,7 @@
                                     },
                                     {
                                         "children": [],
-                                        "depends_on": "BT_CONTROLLER_ENABLED && <choice BT_HOST>",
+                                        "depends_on": "<choice BT_HOST>",
                                         "help": "This option is recommended for BLE only usecases to save on memory",
                                         "id": "BT_NIMBLE_ENABLED",
                                         "name": "BT_NIMBLE_ENABLED",
@@ -10139,6 +10169,16 @@
                             },
                             {
                                 "children": [],
+                                "depends_on": "BT_SMP_ENABLE && BT_BLUEDROID_ENABLED",
+                                "help": "The number of security records for peer devices.",
+                                "id": "BT_SMP_MAX_BONDS",
+                                "name": "BT_SMP_MAX_BONDS",
+                                "range": null,
+                                "title": "BT/BLE maximum bond device count",
+                                "type": "int"
+                            },
+                            {
+                                "children": [],
                                 "depends_on": "BT_BLUEDROID_ENABLED && BT_BLE_ENABLED && BT_BLUEDROID_ENABLED",
                                 "help": "Originally, when doing BLE active scan, Bluedroid will not report adv to application layer\nuntil receive scan response. This option is used to disable the behavior. When enable this option,\nBluedroid will report adv data or scan response to application layer immediately.\n\n# Memory reserved at start of DRAM for Bluetooth stack",
                                 "id": "BT_BLE_ACT_SCAN_REP_ADV_SCAN",
@@ -10563,6 +10603,16 @@
                                         "range": null,
                                         "title": "Enable LE encryption",
                                         "type": "bool"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "BT_NIMBLE_SECURITY_ENABLE && BT_NIMBLE_ENABLED",
+                                        "help": "LE Security Mode 1 Levels:\n1. No Security\n2. Unauthenticated pairing with encryption\n3. Authenticated pairing with encryption\n4. Authenticated LE Secure Connections pairing with encryption using a 128-bit strength encryption key.",
+                                        "id": "BT_NIMBLE_SM_SC_LVL",
+                                        "name": "BT_NIMBLE_SM_SC_LVL",
+                                        "range": null,
+                                        "title": "Security level",
+                                        "type": "int"
                                     }
                                 ],
                                 "depends_on": "BT_NIMBLE_ENABLED && BT_NIMBLE_ENABLED",
@@ -11102,6 +11152,58 @@
                                         "range": null,
                                         "title": "Periodic adv enhancements(adi support)",
                                         "type": "bool"
+                                    },
+                                    {
+                                        "children": [
+                                            {
+                                                "children": [],
+                                                "depends_on": "BT_NIMBLE_GATT_CACHING && BT_NIMBLE_ENABLED",
+                                                "help": "Set this option to set the upper limit on number of connections to be cached.",
+                                                "id": "BT_NIMBLE_GATT_CACHING_MAX_CONNS",
+                                                "name": "BT_NIMBLE_GATT_CACHING_MAX_CONNS",
+                                                "range": null,
+                                                "title": "Maximum connections to be cached",
+                                                "type": "int"
+                                            },
+                                            {
+                                                "children": [],
+                                                "depends_on": "BT_NIMBLE_GATT_CACHING && BT_NIMBLE_ENABLED",
+                                                "help": "Set this option to set the upper limit on number of services per connection to be cached.",
+                                                "id": "BT_NIMBLE_GATT_CACHING_MAX_SVCS",
+                                                "name": "BT_NIMBLE_GATT_CACHING_MAX_SVCS",
+                                                "range": null,
+                                                "title": "Maximum number of services per connection",
+                                                "type": "int"
+                                            },
+                                            {
+                                                "children": [],
+                                                "depends_on": "BT_NIMBLE_GATT_CACHING && BT_NIMBLE_ENABLED",
+                                                "help": "Set this option to set the upper limit on number of characteristics per connection to be cached.",
+                                                "id": "BT_NIMBLE_GATT_CACHING_MAX_CHRS",
+                                                "name": "BT_NIMBLE_GATT_CACHING_MAX_CHRS",
+                                                "range": null,
+                                                "title": "Maximum number of characteristics per connection",
+                                                "type": "int"
+                                            },
+                                            {
+                                                "children": [],
+                                                "depends_on": "BT_NIMBLE_GATT_CACHING && BT_NIMBLE_ENABLED",
+                                                "help": "Set this option to set the upper limit on number of discriptors per connection to be cached.",
+                                                "id": "BT_NIMBLE_GATT_CACHING_MAX_DSCS",
+                                                "name": "BT_NIMBLE_GATT_CACHING_MAX_DSCS",
+                                                "range": null,
+                                                "title": "Maximum number of descriptors per connection",
+                                                "type": "int"
+                                            }
+                                        ],
+                                        "depends_on": "BT_NIMBLE_ENABLED && BT_NIMBLE_50_FEATURE_SUPPORT && BT_NIMBLE_ENABLED",
+                                        "help": "Enable GATT caching",
+                                        "id": "BT_NIMBLE_GATT_CACHING",
+                                        "is_menuconfig": true,
+                                        "name": "BT_NIMBLE_GATT_CACHING",
+                                        "range": null,
+                                        "title": "Enable GATT caching",
+                                        "type": "menu"
                                     }
                                 ],
                                 "depends_on": "BT_NIMBLE_ENABLED && (SOC_BLE_50_SUPPORTED || !BT_CONTROLLER_ENABLED) && BT_NIMBLE_ENABLED",
@@ -11552,6 +11654,185 @@
                                 "range": null,
                                 "title": "BLE queue congestion check",
                                 "type": "bool"
+                            },
+                            {
+                                "children": [
+                                    {
+                                        "children": [
+                                            {
+                                                "children": [],
+                                                "depends_on": "BT_CONTROLLER_DISABLED && BT_NIMBLE_TRANSPORT_UART && BT_NIMBLE_ENABLED",
+                                                "help": "Uart port",
+                                                "id": "BT_NIMBLE_TRANSPORT_UART_PORT",
+                                                "name": "BT_NIMBLE_TRANSPORT_UART_PORT",
+                                                "range": null,
+                                                "title": "Uart port",
+                                                "type": "int"
+                                            }
+                                        ],
+                                        "depends_on": "BT_CONTROLLER_DISABLED && BT_NIMBLE_ENABLED",
+                                        "help": "Use UART transport",
+                                        "id": "BT_NIMBLE_TRANSPORT_UART",
+                                        "name": "BT_NIMBLE_TRANSPORT_UART",
+                                        "range": null,
+                                        "title": "Enable Uart Transport",
+                                        "type": "bool"
+                                    },
+                                    {
+                                        "children": [
+                                            {
+                                                "children": [],
+                                                "depends_on": "<choice BT_NIMBLE_USE_HCI_UART_PARITY>",
+                                                "help": null,
+                                                "id": "UART_PARITY_NONE",
+                                                "name": "UART_PARITY_NONE",
+                                                "range": null,
+                                                "title": "None",
+                                                "type": "bool"
+                                            },
+                                            {
+                                                "children": [],
+                                                "depends_on": "<choice BT_NIMBLE_USE_HCI_UART_PARITY>",
+                                                "help": null,
+                                                "id": "UART_PARITY_ODD",
+                                                "name": "UART_PARITY_ODD",
+                                                "range": null,
+                                                "title": "Odd",
+                                                "type": "bool"
+                                            },
+                                            {
+                                                "children": [],
+                                                "depends_on": "<choice BT_NIMBLE_USE_HCI_UART_PARITY>",
+                                                "help": null,
+                                                "id": "UART_PARITY_EVEN",
+                                                "name": "UART_PARITY_EVEN",
+                                                "range": null,
+                                                "title": "Even",
+                                                "type": "bool"
+                                            }
+                                        ],
+                                        "depends_on": "BT_NIMBLE_ENABLED",
+                                        "help": "Uart Parity",
+                                        "id": "component-config-bluetooth-nimble-options-host-controller-transport-uart-parity",
+                                        "name": "BT_NIMBLE_USE_HCI_UART_PARITY",
+                                        "title": "Uart PARITY",
+                                        "type": "choice"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "BT_NIMBLE_ENABLED",
+                                        "help": null,
+                                        "id": "BT_NIMBLE_TRANSPORT_UART_PARITY_NONE",
+                                        "name": "BT_NIMBLE_TRANSPORT_UART_PARITY_NONE",
+                                        "range": null,
+                                        "title": null,
+                                        "type": "int"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "BT_NIMBLE_ENABLED",
+                                        "help": null,
+                                        "id": "BT_NIMBLE_TRANSPORT_UART_PARITY_ODD",
+                                        "name": "BT_NIMBLE_TRANSPORT_UART_PARITY_ODD",
+                                        "range": null,
+                                        "title": null,
+                                        "type": "int"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "BT_NIMBLE_ENABLED",
+                                        "help": null,
+                                        "id": "BT_NIMBLE_TRANSPORT_UART_PARITY_EVEN",
+                                        "name": "BT_NIMBLE_TRANSPORT_UART_PARITY_EVEN",
+                                        "range": null,
+                                        "title": null,
+                                        "type": "int"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "BT_CONTROLLER_DISABLED && BT_NIMBLE_TRANSPORT_UART && BT_NIMBLE_ENABLED",
+                                        "help": "Rx pin for Nimble Transport",
+                                        "id": "BT_NIMBLE_UART_RX_PIN",
+                                        "name": "BT_NIMBLE_UART_RX_PIN",
+                                        "range": null,
+                                        "title": "UART Rx pin",
+                                        "type": "int"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "BT_CONTROLLER_DISABLED && BT_NIMBLE_TRANSPORT_UART && BT_NIMBLE_ENABLED",
+                                        "help": "Tx pin for Nimble Transport",
+                                        "id": "BT_NIMBLE_UART_TX_PIN",
+                                        "name": "BT_NIMBLE_UART_TX_PIN",
+                                        "range": null,
+                                        "title": "UART Tx pin",
+                                        "type": "int"
+                                    },
+                                    {
+                                        "children": [
+                                            {
+                                                "children": [],
+                                                "depends_on": "<choice BT_NIMBLE_USE_HCI_UART_FLOW_CTRL>",
+                                                "help": null,
+                                                "id": "UART_HW_FLOWCTRL_DISABLE",
+                                                "name": "UART_HW_FLOWCTRL_DISABLE",
+                                                "range": null,
+                                                "title": "Disable",
+                                                "type": "bool"
+                                            },
+                                            {
+                                                "children": [],
+                                                "depends_on": "<choice BT_NIMBLE_USE_HCI_UART_FLOW_CTRL>",
+                                                "help": null,
+                                                "id": "UART_HW_FLOWCTRL_CTS_RTS",
+                                                "name": "UART_HW_FLOWCTRL_CTS_RTS",
+                                                "range": null,
+                                                "title": "Enable hardware flow control",
+                                                "type": "bool"
+                                            }
+                                        ],
+                                        "depends_on": "BT_NIMBLE_ENABLED",
+                                        "help": "Uart Flow Control",
+                                        "id": "component-config-bluetooth-nimble-options-host-controller-transport-uart-flow-control",
+                                        "name": "BT_NIMBLE_USE_HCI_UART_FLOW_CTRL",
+                                        "title": "Uart Flow Control",
+                                        "type": "choice"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "BT_NIMBLE_ENABLED",
+                                        "help": null,
+                                        "id": "BT_NIMBLE_HCI_UART_FLOW_CTRL",
+                                        "name": "BT_NIMBLE_HCI_UART_FLOW_CTRL",
+                                        "range": null,
+                                        "title": null,
+                                        "type": "int"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "BT_NIMBLE_ENABLED",
+                                        "help": "UART HCI RTS pin",
+                                        "id": "BT_NIMBLE_HCI_UART_RTS_PIN",
+                                        "name": "BT_NIMBLE_HCI_UART_RTS_PIN",
+                                        "range": null,
+                                        "title": "UART Rts Pin",
+                                        "type": "int"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "BT_NIMBLE_ENABLED",
+                                        "help": "UART HCI CTS pin",
+                                        "id": "BT_NIMBLE_HCI_UART_CTS_PIN",
+                                        "name": "BT_NIMBLE_HCI_UART_CTS_PIN",
+                                        "range": null,
+                                        "title": "UART Cts Pin",
+                                        "type": "int"
+                                    }
+                                ],
+                                "depends_on": "BT_NIMBLE_ENABLED",
+                                "id": "component-config-bluetooth-nimble-options-host-controller-transport",
+                                "title": "Host-controller Transport",
+                                "type": "menu"
                             }
                         ],
                         "depends_on": "BT_NIMBLE_ENABLED",
@@ -14942,7 +15223,7 @@
                                 "id": "MCPWM_SUPPRESS_DEPRECATE_WARN",
                                 "name": "MCPWM_SUPPRESS_DEPRECATE_WARN",
                                 "range": null,
-                                "title": "Suppress leagcy driver deprecated warning",
+                                "title": "Suppress legacy driver deprecated warning",
                                 "type": "bool"
                             },
                             {
@@ -17063,7 +17344,7 @@
                     },
                     {
                         "children": [],
-                        "depends_on": "USB_OTG_SUPPORTED || ESP_CONSOLE_USB_SERIAL_JTAG || ESP_CONSOLE_SECONDARY_USB_SERIAL_JTAG",
+                        "depends_on": "SOC_USB_OTG_SUPPORTED || ESP_CONSOLE_USB_SERIAL_JTAG || ESP_CONSOLE_SECONDARY_USB_SERIAL_JTAG",
                         "help": "When using USB Serial/JTAG/OTG/CDC, PHY should enable USB, otherwise USB module\ncan not work properly. Notice: Enabling this configuration option will slightly impact wifi performance.",
                         "id": "ESP_PHY_ENABLE_USB",
                         "name": "ESP_PHY_ENABLE_USB",
@@ -17255,7 +17536,7 @@
                             {
                                 "children": [],
                                 "depends_on": "IDF_TARGET_ESP32S3 && PM_POWER_DOWN_CPU_IN_LIGHT_SLEEP",
-                                "help": "Cache tag memory and CPU both belong to the CPU power domain. ESP chips supports saving and restoring Cache tag memory\nbefore and after sleep, this feature supports accesses to the external memory that was cached before sleep still\nbe cached when the CPU wakes up from a powerdowned CPU lightsleep. This option controls the restore method for Cache\ntag memory in lightsleep.\nIf this option is enabled, the I/D-cache tag memory will be backuped to the internal RAM before sleep and restored\nupon wakeup. Depending on the the cache configuration, if this option is enabled, it will consume up to 9 KB\nof internal RAM.\nIf this option is disabled, all cached data won't be kept after sleep, the DCache will be writeback before\nsleep and invalid all cached data after sleep, all accesses to external memory(Flash/PSRAM) will be cache\nmissed after waking up, resulting in performance degradation due to increased memory accesses latency.",
+                                "help": "Cache tag memory and CPU both belong to the CPU power domain.\nESP chips supports saving and restoring Cache tag memory before and after sleep,\nthis feature supports accesses to the external memory that was cached before sleep still\nbe cached when the CPU wakes up from a powerdowned CPU lightsleep.\nThis option controls the restore method for Cache tag memory in lightsleep.\nIf this option is enabled, the I/D-cache tag memory will be backuped to the internal RAM\nbefore sleep and restored upon wakeup.\nDepending on the the cache configuration, if this option is enabled,\nit will consume up to 9 KB of internal RAM.\nIf this option is disabled, all cached data won't be kept after sleep,\nthe DCache will be writeback before sleep and invalid all cached data after sleep,\nall accesses to external memory(Flash/PSRAM) will be cache missed after waking up,\nresulting in performance degradation due to increased memory accesses latency.",
                                 "id": "PM_RESTORE_CACHE_TAGMEM_AFTER_LIGHT_SLEEP",
                                 "name": "PM_RESTORE_CACHE_TAGMEM_AFTER_LIGHT_SLEEP",
                                 "range": null,
@@ -17264,7 +17545,7 @@
                             }
                         ],
                         "depends_on": "SOC_PM_SUPPORT_CPU_PD",
-                        "help": "If enabled, the CPU will be powered down in light sleep, ESP chips supports saving and restoring CPU's running\ncontext before and after light sleep, the feature provides applications with seamless CPU powerdowned lightsleep\nwithout user awareness.\nBut this will takes up some internal memory. On esp32c3 soc, enabling this option will consume 1.68 KB of internal\nRAM and will reduce sleep current consumption by about 100 uA. On esp32s3 soc, enabling this option will consume\n8.58 KB of internal RAM and will reduce sleep current consumption by about 650 uA.",
+                        "help": "If enabled, the CPU will be powered down in light sleep,\nESP chips supports saving and restoring CPU's running context before and after light sleep,\nthe feature provides applications with seamless CPU powerdowned lightsleep without user awareness.\nBut this will takes up some internal memory.\nOn esp32c3 soc, enabling this option will consume 1.68 KB of internal RAM\nand will reduce sleep current consumption by about 100 uA.\nOn esp32s3 soc, enabling this option will consume 8.58 KB of internal RAM\nand will reduce sleep current consumption by about 650 uA.",
                         "id": "PM_POWER_DOWN_CPU_IN_LIGHT_SLEEP",
                         "name": "PM_POWER_DOWN_CPU_IN_LIGHT_SLEEP",
                         "range": null,
@@ -19029,7 +19310,7 @@
                         "children": [
                             {
                                 "children": [],
-                                "depends_on": "ESP_WIFI_MBEDTLS_CRYPTO",
+                                "depends_on": "ESP_WIFI_ENTERPRISE_SUPPORT && ESP_WIFI_MBEDTLS_CRYPTO",
                                 "help": "Select this option to use MbedTLS TLS client for WPA2 enterprise connection.\nPlease note that from MbedTLS-3.0 onwards, MbedTLS does not support SSL-3.0\nTLS-v1.0, TLS-v1.1 versions. Incase your server is using one of these version,\nit is advisable to update your server.\nPlease disable this option for compatibilty with older TLS versions.",
                                 "id": "ESP_WIFI_MBEDTLS_TLS_CLIENT",
                                 "name": "ESP_WIFI_MBEDTLS_TLS_CLIENT",
@@ -19197,7 +19478,18 @@
                         "type": "bool"
                     },
                     {
-                        "children": [],
+                        "children": [
+                            {
+                                "children": [],
+                                "depends_on": "ESP_WIFI_ENTERPRISE_SUPPORT",
+                                "help": "Select this configuration to free dynamic buffers during WiFi enterprise connection.\nThis will enable chip to reduce heap consumption during WiFi enterprise connection.",
+                                "id": "ESP_WIFI_ENT_FREE_DYNAMIC_BUFFER",
+                                "name": "ESP_WIFI_ENT_FREE_DYNAMIC_BUFFER",
+                                "range": null,
+                                "title": "Free dynamic buffers during WiFi enterprise connection",
+                                "type": "bool"
+                            }
+                        ],
                         "depends_on": null,
                         "help": "Select this to enable/disable enterprise connection support.\n\ndisabling this will reduce binary size.\ndisabling this will disable the use of any esp_wifi_sta_wpa2_ent_* (as APIs will be meaningless)",
                         "id": "ESP_WIFI_ENTERPRISE_SUPPORT",
@@ -20986,6 +21278,188 @@
                                 "name": "IEEE802154_CCA_MODE",
                                 "title": "Clear Channel Assessment (CCA) mode",
                                 "type": "choice"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "IEEE802154_ENABLED",
+                                "help": null,
+                                "id": "IEEE802154_CCA_MODE",
+                                "name": "IEEE802154_CCA_MODE",
+                                "range": null,
+                                "title": null,
+                                "type": "int"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "IEEE802154_ENABLED",
+                                "help": "set the CCA threshold, in dB",
+                                "id": "IEEE802154_CCA_THRESHOLD",
+                                "name": "IEEE802154_CCA_THRESHOLD",
+                                "range": [
+                                    -120,
+                                    0
+                                ],
+                                "title": "CCA detection threshold",
+                                "type": "int"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "IEEE802154_ENABLED",
+                                "help": "set the pending table size",
+                                "id": "IEEE802154_PENDING_TABLE_SIZE",
+                                "name": "IEEE802154_PENDING_TABLE_SIZE",
+                                "range": [
+                                    1,
+                                    100
+                                ],
+                                "title": "Pending table size",
+                                "type": "int"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "IEEE802154_ENABLED",
+                                "help": "Enable IEEE802154 multi-pan",
+                                "id": "IEEE802154_MULTI_PAN_ENABLE",
+                                "name": "IEEE802154_MULTI_PAN_ENABLE",
+                                "range": null,
+                                "title": "Enable multi-pan feature for frame filter",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "IEEE802154_ENABLED",
+                                "help": "Enabling this option increases throughput by ~5% at the expense of ~2.1k\nIRAM code size increase.",
+                                "id": "IEEE802154_TIMING_OPTIMIZATION",
+                                "name": "IEEE802154_TIMING_OPTIMIZATION",
+                                "range": null,
+                                "title": "Enable throughput optimization",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "PM_ENABLE && IEEE802154_ENABLED",
+                                "help": "Enabling this option allows the IEEE802.15.4 module to be powered down during automatic light sleep,\nwhich reduces current consumption.",
+                                "id": "IEEE802154_SLEEP_ENABLE",
+                                "name": "IEEE802154_SLEEP_ENABLE",
+                                "range": null,
+                                "title": "Enable IEEE802154 light sleep",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [
+                                    {
+                                        "children": [],
+                                        "depends_on": "IEEE802154_DEBUG",
+                                        "help": "Enabling this option to add some probe codes in the driver, and these informations\nwill be printed when assert.",
+                                        "id": "IEEE802154_ASSERT",
+                                        "name": "IEEE802154_ASSERT",
+                                        "range": null,
+                                        "title": "Enrich the assert information with IEEE802154 state and event",
+                                        "type": "bool"
+                                    },
+                                    {
+                                        "children": [
+                                            {
+                                                "children": [],
+                                                "depends_on": "IEEE802154_RECORD_EVENT",
+                                                "help": "set the record event table size",
+                                                "id": "IEEE802154_RECORD_EVENT_SIZE",
+                                                "name": "IEEE802154_RECORD_EVENT_SIZE",
+                                                "range": null,
+                                                "title": "Record event table size",
+                                                "type": "int"
+                                            }
+                                        ],
+                                        "depends_on": "IEEE802154_DEBUG",
+                                        "help": "Enabling this option to record event, when assert, the recorded event will be printed.",
+                                        "id": "IEEE802154_RECORD_EVENT",
+                                        "name": "IEEE802154_RECORD_EVENT",
+                                        "range": null,
+                                        "title": "Enable record event information for debugging",
+                                        "type": "bool"
+                                    },
+                                    {
+                                        "children": [
+                                            {
+                                                "children": [],
+                                                "depends_on": "IEEE802154_RECORD_STATE",
+                                                "help": "set the record state table size",
+                                                "id": "IEEE802154_RECORD_STATE_SIZE",
+                                                "name": "IEEE802154_RECORD_STATE_SIZE",
+                                                "range": null,
+                                                "title": "Record state table size",
+                                                "type": "int"
+                                            }
+                                        ],
+                                        "depends_on": "IEEE802154_DEBUG",
+                                        "help": "Enabling this option to record state, when assert, the recorded state will be printed.",
+                                        "id": "IEEE802154_RECORD_STATE",
+                                        "name": "IEEE802154_RECORD_STATE",
+                                        "range": null,
+                                        "title": "Enable record state information for debugging",
+                                        "type": "bool"
+                                    },
+                                    {
+                                        "children": [
+                                            {
+                                                "children": [],
+                                                "depends_on": "IEEE802154_RECORD_CMD",
+                                                "help": "set the record command table size",
+                                                "id": "IEEE802154_RECORD_CMD_SIZE",
+                                                "name": "IEEE802154_RECORD_CMD_SIZE",
+                                                "range": null,
+                                                "title": "Record command table size",
+                                                "type": "int"
+                                            }
+                                        ],
+                                        "depends_on": "IEEE802154_DEBUG",
+                                        "help": "Enabling this option to record the command, when assert, the recorded\ncommand will be printed.",
+                                        "id": "IEEE802154_RECORD_CMD",
+                                        "name": "IEEE802154_RECORD_CMD",
+                                        "range": null,
+                                        "title": "Enable record command information for debugging",
+                                        "type": "bool"
+                                    },
+                                    {
+                                        "children": [
+                                            {
+                                                "children": [],
+                                                "depends_on": "IEEE802154_RECORD_ABORT",
+                                                "help": "set the record abort table size",
+                                                "id": "IEEE802154_RECORD_ABORT_SIZE",
+                                                "name": "IEEE802154_RECORD_ABORT_SIZE",
+                                                "range": null,
+                                                "title": "Record abort table size",
+                                                "type": "int"
+                                            }
+                                        ],
+                                        "depends_on": "IEEE802154_DEBUG",
+                                        "help": "Enabling this option to record the abort, when assert, the recorded\nabort will be printed.",
+                                        "id": "IEEE802154_RECORD_ABORT",
+                                        "name": "IEEE802154_RECORD_ABORT",
+                                        "range": null,
+                                        "title": "Enable record abort information for debugging",
+                                        "type": "bool"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "IEEE802154_DEBUG",
+                                        "help": "Enabling this option to record the tx and rx",
+                                        "id": "IEEE802154_TXRX_STATISTIC",
+                                        "name": "IEEE802154_TXRX_STATISTIC",
+                                        "range": null,
+                                        "title": "Enable record tx/rx packets information for debugging",
+                                        "type": "bool"
+                                    }
+                                ],
+                                "depends_on": "IEEE802154_ENABLED",
+                                "help": "Enabling this option allows different kinds of IEEE802154 debug output.\nAll IEEE802154 debug features increase the size of the final binary.",
+                                "id": "IEEE802154_DEBUG",
+                                "is_menuconfig": true,
+                                "name": "IEEE802154_DEBUG",
+                                "range": null,
+                                "title": "Enable IEEE802154 Debug",
+                                "type": "menu"
                             }
                         ],
                         "depends_on": null,
@@ -20995,198 +21469,6 @@
                         "range": null,
                         "title": "IEEE802154 Enable",
                         "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "configure the receive done handler feature, when enabled, the user must call the\nfunction `esp_ieee802154_receive_handle_done` to inform the 802.15.4 driver that\nthe received frame has been processed, so the frame space could be freed.",
-                        "id": "IEEE802154_RECEIVE_DONE_HANDLER",
-                        "name": "IEEE802154_RECEIVE_DONE_HANDLER",
-                        "range": null,
-                        "title": "Enable the receive done handler feature",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": "IEEE802154_ENABLED",
-                        "help": null,
-                        "id": "IEEE802154_CCA_MODE",
-                        "name": "IEEE802154_CCA_MODE",
-                        "range": null,
-                        "title": null,
-                        "type": "int"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": "IEEE802154_ENABLED",
-                        "help": "set the CCA threshold, in dB",
-                        "id": "IEEE802154_CCA_THRESHOLD",
-                        "name": "IEEE802154_CCA_THRESHOLD",
-                        "range": [
-                            -120,
-                            0
-                        ],
-                        "title": "CCA detection threshold",
-                        "type": "int"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": "IEEE802154_ENABLED",
-                        "help": "set the pending table size",
-                        "id": "IEEE802154_PENDING_TABLE_SIZE",
-                        "name": "IEEE802154_PENDING_TABLE_SIZE",
-                        "range": [
-                            1,
-                            100
-                        ],
-                        "title": "Pending table size",
-                        "type": "int"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": "IEEE802154_ENABLED",
-                        "help": "Enable IEEE802154 multi-pan",
-                        "id": "IEEE802154_MULTI_PAN_ENABLE",
-                        "name": "IEEE802154_MULTI_PAN_ENABLE",
-                        "range": null,
-                        "title": "Enable multi-pan feature for frame filter",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": "IEEE802154_ENABLED",
-                        "help": "Enabling this option increases throughput by ~5% at the expense of ~2.1k\nIRAM code size increase.",
-                        "id": "IEEE802154_TIMING_OPTIMIZATION",
-                        "name": "IEEE802154_TIMING_OPTIMIZATION",
-                        "range": null,
-                        "title": "Enable throughput optimization",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": "PM_ENABLE && IEEE802154_ENABLED",
-                        "help": "Enabling this option allows the IEEE802.15.4 module to be powered down during automatic light sleep,\nwhich reduces current consumption.",
-                        "id": "IEEE802154_SLEEP_ENABLE",
-                        "name": "IEEE802154_SLEEP_ENABLE",
-                        "range": null,
-                        "title": "Enable IEEE802154 light sleep",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [
-                            {
-                                "children": [],
-                                "depends_on": "IEEE802154_DEBUG",
-                                "help": "Enabling this option to add some probe codes in the driver, and these informations\nwill be printed when assert.",
-                                "id": "IEEE802154_ASSERT",
-                                "name": "IEEE802154_ASSERT",
-                                "range": null,
-                                "title": "Enrich the assert information with IEEE802154 state and event",
-                                "type": "bool"
-                            },
-                            {
-                                "children": [
-                                    {
-                                        "children": [],
-                                        "depends_on": "IEEE802154_RECORD_EVENT",
-                                        "help": "set the record event table size",
-                                        "id": "IEEE802154_RECORD_EVENT_SIZE",
-                                        "name": "IEEE802154_RECORD_EVENT_SIZE",
-                                        "range": null,
-                                        "title": "Record event table size",
-                                        "type": "int"
-                                    }
-                                ],
-                                "depends_on": "IEEE802154_DEBUG",
-                                "help": "Enabling this option to record event, when assert, the recorded event will be printed.",
-                                "id": "IEEE802154_RECORD_EVENT",
-                                "name": "IEEE802154_RECORD_EVENT",
-                                "range": null,
-                                "title": "Enable record event information for debugging",
-                                "type": "bool"
-                            },
-                            {
-                                "children": [
-                                    {
-                                        "children": [],
-                                        "depends_on": "IEEE802154_RECORD_STATE",
-                                        "help": "set the record state table size",
-                                        "id": "IEEE802154_RECORD_STATE_SIZE",
-                                        "name": "IEEE802154_RECORD_STATE_SIZE",
-                                        "range": null,
-                                        "title": "Record state table size",
-                                        "type": "int"
-                                    }
-                                ],
-                                "depends_on": "IEEE802154_DEBUG",
-                                "help": "Enabling this option to record state, when assert, the recorded state will be printed.",
-                                "id": "IEEE802154_RECORD_STATE",
-                                "name": "IEEE802154_RECORD_STATE",
-                                "range": null,
-                                "title": "Enable record state information for debugging",
-                                "type": "bool"
-                            },
-                            {
-                                "children": [
-                                    {
-                                        "children": [],
-                                        "depends_on": "IEEE802154_RECORD_CMD",
-                                        "help": "set the record command table size",
-                                        "id": "IEEE802154_RECORD_CMD_SIZE",
-                                        "name": "IEEE802154_RECORD_CMD_SIZE",
-                                        "range": null,
-                                        "title": "Record command table size",
-                                        "type": "int"
-                                    }
-                                ],
-                                "depends_on": "IEEE802154_DEBUG",
-                                "help": "Enabling this option to record the command, when assert, the recorded\ncommand will be printed.",
-                                "id": "IEEE802154_RECORD_CMD",
-                                "name": "IEEE802154_RECORD_CMD",
-                                "range": null,
-                                "title": "Enable record command information for debugging",
-                                "type": "bool"
-                            },
-                            {
-                                "children": [
-                                    {
-                                        "children": [],
-                                        "depends_on": "IEEE802154_RECORD_ABORT",
-                                        "help": "set the record abort table size",
-                                        "id": "IEEE802154_RECORD_ABORT_SIZE",
-                                        "name": "IEEE802154_RECORD_ABORT_SIZE",
-                                        "range": null,
-                                        "title": "Record abort table size",
-                                        "type": "int"
-                                    }
-                                ],
-                                "depends_on": "IEEE802154_DEBUG",
-                                "help": "Enabling this option to record the abort, when assert, the recorded\nabort will be printed.",
-                                "id": "IEEE802154_RECORD_ABORT",
-                                "name": "IEEE802154_RECORD_ABORT",
-                                "range": null,
-                                "title": "Enable record abort information for debugging",
-                                "type": "bool"
-                            },
-                            {
-                                "children": [],
-                                "depends_on": "IEEE802154_DEBUG",
-                                "help": "Enabling this option to record the tx and rx",
-                                "id": "IEEE802154_TXRX_STATISTIC",
-                                "name": "IEEE802154_TXRX_STATISTIC",
-                                "range": null,
-                                "title": "Enable record tx/rx packets information for debugging",
-                                "type": "bool"
-                            }
-                        ],
-                        "depends_on": "IEEE802154_ENABLED",
-                        "help": "Enabling this option allows different kinds of IEEE802154 debug output.\nAll IEEE802154 debug features increase the size of the final binary.",
-                        "id": "IEEE802154_DEBUG",
-                        "is_menuconfig": true,
-                        "name": "IEEE802154_DEBUG",
-                        "range": null,
-                        "title": "Enable IEEE802154 Debug",
-                        "type": "menu"
                     }
                 ],
                 "depends_on": null,
@@ -21543,7 +21825,7 @@
                             {
                                 "children": [],
                                 "depends_on": "LWIP_ND6",
-                                "help": "This option is used to set the the router flag for the NA packets.\nWhen enabled, the router flag in NA packet will always set to 1, otherwise, never set router flag for NA packets.",
+                                "help": "This option is used to set the the router flag for the NA packets.\nWhen enabled, the router flag in NA packet will always set to 1,\notherwise, never set router flag for NA packets.",
                                 "id": "LWIP_FORCE_ROUTER_FORWARDING",
                                 "name": "LWIP_FORCE_ROUTER_FORWARDING",
                                 "range": null,
@@ -22242,7 +22524,7 @@
                                     {
                                         "children": [],
                                         "depends_on": "LWIP_TCP_QUEUE_OOSEQ",
-                                        "help": "If LWIP_TCP_OOSEQ_MAX_PBUFS = 0, TCP will not control the number of OOSEQ pbufs.\n\nIn a poor network environment, many out-of-order tcp pbufs will be received.\nThese out-of-order pbufs will be cached in the TCP out-of-order queue which will\ncause Wi-Fi/Ethernet fail to release RX buffer in time.\nIt is possible that all RX buffers for MAC layer are used by OOSEQ.\n\nControl the number of out-of-order pbufs to ensure that the MAC layer has enough RX buffer to receive packets.\n\nIn the Wi-Fi scenario, recommended OOSEQ PBUFS Range: 0 <= TCP_OOSEQ_MAX_PBUFS <= CONFIG_ESP_WIFI_DYNAMIC_RX_BUFFER_NUM/(MAX_TCP_NUMBER + 1)\n\nIn the Ethernet scenario,recommended Ethernet OOSEQ PBUFS Range: 0 <= TCP_OOSEQ_MAX_PBUFS <= CONFIG_ETH_DMA_RX_BUFFER_NUM/(MAX_TCP_NUMBER + 1)\n\nWithin the recommended value range, the larger the value, the better the performance.\n\nMAX_TCP_NUMBER represent Maximum number of TCP connections in Wi-Fi(STA+SoftAP) and Ethernet scenario.",
+                                        "help": "If LWIP_TCP_OOSEQ_MAX_PBUFS = 0, TCP will not control the number of OOSEQ pbufs.\n\nIn a poor network environment, many out-of-order tcp pbufs will be received.\nThese out-of-order pbufs will be cached in the TCP out-of-order queue which will\ncause Wi-Fi/Ethernet fail to release RX buffer in time.\nIt is possible that all RX buffers for MAC layer are used by OOSEQ.\n\nControl the number of out-of-order pbufs to ensure\nthat the MAC layer has enough RX buffer to receive packets.\n\nIn the Wi-Fi scenario, recommended OOSEQ PBUFS Range:\n0 <= TCP_OOSEQ_MAX_PBUFS <= CONFIG_ESP_WIFI_DYNAMIC_RX_BUFFER_NUM/(MAX_TCP_NUMBER + 1)\n\nIn the Ethernet scenario,recommended Ethernet OOSEQ PBUFS Range:\n0 <= TCP_OOSEQ_MAX_PBUFS <= CONFIG_ETH_DMA_RX_BUFFER_NUM/(MAX_TCP_NUMBER + 1)\n\nWithin the recommended value range, the larger the value, the better the performance.\n\nMAX_TCP_NUMBER represent Maximum number of TCP connections in Wi-Fi(STA+SoftAP) and Ethernet scenario.",
                                         "id": "LWIP_TCP_OOSEQ_MAX_PBUFS",
                                         "name": "LWIP_TCP_OOSEQ_MAX_PBUFS",
                                         "range": [
@@ -22756,6 +23038,48 @@
                         "depends_on": null,
                         "id": "component-config-lwip-sntp",
                         "title": "SNTP",
+                        "type": "menu"
+                    },
+                    {
+                        "children": [
+                            {
+                                "children": [],
+                                "depends_on": null,
+                                "help": "Set maximum number of DNS servers.\nIf fallback DNS servers are supported,\nthe number of DNS servers needs to be greater than or equal to 3.",
+                                "id": "LWIP_DNS_MAX_SERVERS",
+                                "name": "LWIP_DNS_MAX_SERVERS",
+                                "range": [
+                                    1,
+                                    4
+                                ],
+                                "title": "Maximum number of DNS servers",
+                                "type": "int"
+                            },
+                            {
+                                "children": [
+                                    {
+                                        "children": [],
+                                        "depends_on": "LWIP_FALLBACK_DNS_SERVER_SUPPORT",
+                                        "help": "This option allows you to config dns fallback server address.",
+                                        "id": "LWIP_FALLBACK_DNS_SERVER_ADDRESS",
+                                        "name": "LWIP_FALLBACK_DNS_SERVER_ADDRESS",
+                                        "range": null,
+                                        "title": "DNS fallback server address",
+                                        "type": "string"
+                                    }
+                                ],
+                                "depends_on": "LWIP_DNS_MAX_SERVERS >= 3",
+                                "help": "Enable this feature to support DNS fallback server.",
+                                "id": "LWIP_FALLBACK_DNS_SERVER_SUPPORT",
+                                "name": "LWIP_FALLBACK_DNS_SERVER_SUPPORT",
+                                "range": null,
+                                "title": "Enable DNS fallback server support",
+                                "type": "bool"
+                            }
+                        ],
+                        "depends_on": null,
+                        "id": "component-config-lwip-dns",
+                        "title": "DNS",
                         "type": "menu"
                     },
                     {
@@ -25537,6 +25861,16 @@
                     },
                     {
                         "children": [],
+                        "depends_on": "OPENTHREAD_RADIO",
+                        "help": "Select this to enable OpenThread NCP vendor commands.",
+                        "id": "OPENTHREAD_NCP_VENDOR_HOOK",
+                        "name": "OPENTHREAD_NCP_VENDOR_HOOK",
+                        "range": null,
+                        "title": "Enable vendor command for RCP",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
                         "depends_on": "OPENTHREAD_ENABLED",
                         "help": "Select this option to enable Command-Line Interface in OpenThread.",
                         "id": "OPENTHREAD_CLI",
@@ -25649,7 +25983,7 @@
                     },
                     {
                         "children": [],
-                        "depends_on": "OPENTHREAD_ENABLED",
+                        "depends_on": "OPENTHREAD_ENABLED || OPENTHREAD_SPINEL_ONLY",
                         "help": null,
                         "id": "OPENTHREAD_SPINEL_RX_FRAME_BUFFER_SIZE",
                         "name": "OPENTHREAD_SPINEL_RX_FRAME_BUFFER_SIZE",
@@ -25807,6 +26141,64 @@
                         "range": null,
                         "title": "Enable Radio Statistics feature",
                         "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Select this option to enable the OpenThread Radio Spinel for external protocol stack, such as Zigbee.",
+                        "id": "OPENTHREAD_SPINEL_ONLY",
+                        "name": "OPENTHREAD_SPINEL_ONLY",
+                        "range": null,
+                        "title": "Enable OpenThread External Radio Spinel feature",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Select this option to enable OpenThread radio capibility rx on when idle. Do not support this feature when\nSW coexistence is enabled.",
+                        "id": "OPENTHREAD_RX_ON_WHEN_IDLE",
+                        "name": "OPENTHREAD_RX_ON_WHEN_IDLE",
+                        "range": null,
+                        "title": "Enable OpenThread radio capibility rx on when idle",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [
+                            {
+                                "children": [],
+                                "depends_on": "OPENTHREAD_FTD || OPENTHREAD_MTD",
+                                "help": null,
+                                "id": "OPENTHREAD_ADDRESS_QUERY_TIMEOUT",
+                                "name": "OPENTHREAD_ADDRESS_QUERY_TIMEOUT",
+                                "range": null,
+                                "title": "Timeout value (in seconds) for a address notification response after sending an address query.",
+                                "type": "int"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "OPENTHREAD_FTD || OPENTHREAD_MTD",
+                                "help": null,
+                                "id": "OPENTHREAD_ADDRESS_QUERY_RETRY_DELAY",
+                                "name": "OPENTHREAD_ADDRESS_QUERY_RETRY_DELAY",
+                                "range": null,
+                                "title": "Initial retry delay for address query (in seconds).",
+                                "type": "int"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "OPENTHREAD_FTD || OPENTHREAD_MTD",
+                                "help": null,
+                                "id": "OPENTHREAD_ADDRESS_QUERY_MAX_RETRY_DELAY",
+                                "name": "OPENTHREAD_ADDRESS_QUERY_MAX_RETRY_DELAY",
+                                "range": null,
+                                "title": "Maximum retry delay for address query (in seconds).",
+                                "type": "int"
+                            }
+                        ],
+                        "depends_on": null,
+                        "id": "component-config-openthread-thread-address-query-config",
+                        "title": "Thread Address Query Config",
+                        "type": "menu"
                     }
                 ],
                 "depends_on": null,
@@ -26988,17 +27380,7 @@
                 "children": [
                     {
                         "children": [],
-                        "depends_on": null,
-                        "help": null,
-                        "id": "USB_OTG_SUPPORTED",
-                        "name": "USB_OTG_SUPPORTED",
-                        "range": null,
-                        "title": null,
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": "USB_OTG_SUPPORTED",
+                        "depends_on": "SOC_USB_OTG_SUPPORTED",
                         "help": "Each USB device attached is allocated a dedicated buffer for its OUT/IN transfers to/from the device's\ncontrol endpoint. The maximum size of that buffer is determined by this option. The limited size of the\ntransfer buffer have the following implications:\n- The maximum length of control transfers is limited\n- Device's with configuration descriptors larger than this limit cannot be supported",
                         "id": "USB_HOST_CONTROL_TRANSFER_MAX_SIZE",
                         "name": "USB_HOST_CONTROL_TRANSFER_MAX_SIZE",
@@ -27039,7 +27421,7 @@
                                 "type": "bool"
                             }
                         ],
-                        "depends_on": "USB_OTG_SUPPORTED",
+                        "depends_on": "SOC_USB_OTG_SUPPORTED",
                         "help": "The underlying hardware has size adjustable FIFOs to cache USB packets on reception (IN) or for\ntransmission (OUT). The size of these FIFOs will affect the largest MPS (maximum packet size) and the\nmaximum number of packets that can be cached at any one time. The hardware contains the following\nFIFOS: RX (for all IN packets), Non-periodic TX (for Bulk and Control OUT packets), and Periodic TX\n(for Interrupt and Isochronous OUT packets). This configuration option allows biasing the FIFO sizes\ntowards a particular use case, which may be necessary for devices that have endpoints with large MPS.\nThe MPS limits for each biasing are listed below:\n\nBalanced:\n- IN (all transfer types), 408 bytes\n- OUT non-periodic (Bulk/Control), 192 bytes (i.e., 3 x 64 byte packets)\n- OUT periodic (Interrupt/Isochronous), 192 bytes\n\nBias IN:\n- IN (all transfer types), 600 bytes\n- OUT non-periodic (Bulk/Control), 64 bytes (i.e., 1 x 64 byte packets)\n- OUT periodic (Interrupt/Isochronous), 128 bytes\n\nBias Periodic OUT:\n- IN (all transfer types), 128 bytes\n- OUT non-periodic (Bulk/Control), 64 bytes (i.e., 1 x 64 byte packets)\n- OUT periodic (Interrupt/Isochronous), 600 bytes",
                         "id": "component-config-usb-otg-hardware-fifo-size-biasing",
                         "name": "USB_HOST_HW_BUFFER_BIAS",
@@ -27050,7 +27432,7 @@
                         "children": [
                             {
                                 "children": [],
-                                "depends_on": "USB_OTG_SUPPORTED",
+                                "depends_on": "SOC_USB_OTG_SUPPORTED",
                                 "help": "On connection of a USB device, the USB 2.0 specification requires a \"debounce interval with a minimum\nduration of 100ms\" to allow the connection to stabilize (see USB 2.0 chapter 7.1.7.3 for more details).\nDuring the debounce interval, no new connection/disconnection events are registered.\n\nThe default value is set to 250 ms to be safe.",
                                 "id": "USB_HOST_DEBOUNCE_DELAY_MS",
                                 "name": "USB_HOST_DEBOUNCE_DELAY_MS",
@@ -27060,7 +27442,7 @@
                             },
                             {
                                 "children": [],
-                                "depends_on": "USB_OTG_SUPPORTED",
+                                "depends_on": "SOC_USB_OTG_SUPPORTED",
                                 "help": "The reset signaling can be generated on any Hub or Host Controller port by request from the USB System\nSoftware. The USB 2.0 specification requires that \"the reset signaling must be driven for a minimum of\n10ms\" (see USB 2.0 chapter 7.1.7.5 for more details).  After the reset, the hub port will transition to\nthe Enabled state (refer to Section 11.5).\n\nThe default value is set to 30 ms to be safe.",
                                 "id": "USB_HOST_RESET_HOLD_MS",
                                 "name": "USB_HOST_RESET_HOLD_MS",
@@ -27070,7 +27452,7 @@
                             },
                             {
                                 "children": [],
-                                "depends_on": "USB_OTG_SUPPORTED",
+                                "depends_on": "SOC_USB_OTG_SUPPORTED",
                                 "help": "After a port stops driving the reset signal, the USB 2.0 specification requires that the \"USB System\nSoftware guarantees a minimum of 10 ms for reset recovery\" before the attached device is expected to\nrespond to data transfers (see USB 2.0 chapter 7.1.7.3 for more details). The device may ignore any\ndata transfers during the recovery interval.\n\nThe default value is set to 30 ms to be safe.",
                                 "id": "USB_HOST_RESET_RECOVERY_MS",
                                 "name": "USB_HOST_RESET_RECOVERY_MS",
@@ -27080,7 +27462,7 @@
                             },
                             {
                                 "children": [],
-                                "depends_on": "USB_OTG_SUPPORTED",
+                                "depends_on": "SOC_USB_OTG_SUPPORTED",
                                 "help": "\"After successful completion of the Status stage, the device is allowed a SetAddress() recovery\ninterval of 2 ms. At the end of this interval, the device must be able to accept Setup packets\naddressed to the new address. Also, at the end of the recovery interval, the device must not respond to\ntokens sent to the old address (unless, of course, the old and new address is the same).\" See USB 2.0\nchapter 9.2.6.3 for more details.\n\nThe default value is set to 10 ms to be safe.",
                                 "id": "USB_HOST_SET_ADDR_RECOVERY_MS",
                                 "name": "USB_HOST_SET_ADDR_RECOVERY_MS",
@@ -27089,13 +27471,33 @@
                                 "type": "int"
                             }
                         ],
-                        "depends_on": null,
+                        "depends_on": "SOC_USB_OTG_SUPPORTED",
                         "id": "component-config-usb-otg-root-hub-configuration",
                         "title": "Root Hub configuration",
                         "type": "menu"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "SOC_USB_OTG_SUPPORTED",
+                        "help": null,
+                        "id": "USB_OTG_SUPPORTED",
+                        "name": "USB_OTG_SUPPORTED",
+                        "range": null,
+                        "title": null,
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "SOC_USB_OTG_SUPPORTED",
+                        "help": "The enumeration filter callback is called before enumeration of each newly attached device. This callback\nallows users to control whether a device should be enumerated, and what configuration number to use when\nenumerating a device.\n\nIf enabled, the enumeration filter callback can be set via 'usb_host_config_t' when calling\n'usb_host_install()'.",
+                        "id": "USB_HOST_ENABLE_ENUM_FILTER_CALLBACK",
+                        "name": "USB_HOST_ENABLE_ENUM_FILTER_CALLBACK",
+                        "range": null,
+                        "title": "Enable enumeration filter callback",
+                        "type": "bool"
                     }
                 ],
-                "depends_on": null,
+                "depends_on": "SOC_USB_OTG_SUPPORTED",
                 "id": "component-config-usb-otg",
                 "title": "USB-OTG",
                 "type": "menu"
@@ -30439,34 +30841,6 @@
                 "children": [
                     {
                         "children": [],
-                        "depends_on": "!IDF_TARGET_ESP32 && !IDF_TARGET_ESP32C2",
-                        "help": "Enable the DS peripheral support. Not supported on esp32 and esp32c2.",
-                        "id": "ESP_SECURE_CERT_DS_PERIPHERAL",
-                        "name": "ESP_SECURE_CERT_DS_PERIPHERAL",
-                        "range": null,
-                        "title": "Enable DS peripheral support",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "This option enables support for the legacy formats along with\nthe current format in the esp_secure_cert component.\nThe current format is\ncust_flash_tlv\nThe legacy formats are as follows:\ncust_flash\nnvs",
-                        "id": "ESP_SECURE_CERT_SUPPORT_LEGACY_FORMATS",
-                        "name": "ESP_SECURE_CERT_SUPPORT_LEGACY_FORMATS",
-                        "range": null,
-                        "title": "Enable support for legacy formats",
-                        "type": "bool"
-                    }
-                ],
-                "depends_on": null,
-                "id": "component-config-esp-secure-cert-manager",
-                "title": "ESP Secure Cert Manager",
-                "type": "menu"
-            },
-            {
-                "children": [
-                    {
-                        "children": [],
                         "depends_on": null,
                         "help": null,
                         "id": "ESP_LCD_TOUCH_MAX_POINTS",
@@ -30736,6 +31110,34 @@
                 "depends_on": null,
                 "id": "component-config-mdns",
                 "title": "mDNS",
+                "type": "menu"
+            },
+            {
+                "children": [
+                    {
+                        "children": [],
+                        "depends_on": "!IDF_TARGET_ESP32 && !IDF_TARGET_ESP32C2",
+                        "help": "Enable the DS peripheral support. Not supported on esp32 and esp32c2.",
+                        "id": "ESP_SECURE_CERT_DS_PERIPHERAL",
+                        "name": "ESP_SECURE_CERT_DS_PERIPHERAL",
+                        "range": null,
+                        "title": "Enable DS peripheral support",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "This option enables support for the legacy formats along with\nthe current format in the esp_secure_cert component.\nThe current format is\ncust_flash_tlv\nThe legacy formats are as follows:\ncust_flash\nnvs",
+                        "id": "ESP_SECURE_CERT_SUPPORT_LEGACY_FORMATS",
+                        "name": "ESP_SECURE_CERT_SUPPORT_LEGACY_FORMATS",
+                        "range": null,
+                        "title": "Enable support for legacy formats",
+                        "type": "bool"
+                    }
+                ],
+                "depends_on": null,
+                "id": "component-config-esp-secure-cert-manager",
+                "title": "ESP Secure Cert Manager",
                 "type": "menu"
             }
         ],

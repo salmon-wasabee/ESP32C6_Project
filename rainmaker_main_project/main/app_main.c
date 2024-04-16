@@ -24,6 +24,7 @@
 
 #include "app_priv.h"
 #include "oled/oled.h"
+#include "oled/jarvis_ui.h"
 #include "mic_test/mic_test.h"
 
 static const char *TAG = "app_main";
@@ -62,6 +63,7 @@ static esp_err_t write_cb(const esp_rmaker_device_t *device, const esp_rmaker_pa
     return ESP_OK;
 }
 
+
 void app_main()
 {
     /* Initialize Application specific hardware drivers and
@@ -77,11 +79,11 @@ void app_main()
         err = nvs_flash_init();
     }
     ESP_ERROR_CHECK( err );
-    oled_main();
-    // Create the task to update the OLED screen
-    
-    // xTaskCreate(update_oled_task, "Update OLED Task", 2048, NULL, 5, NULL);
 
+    // Starts Mic recording
+    xTaskCreate(mic_main, "mic_main_task", 4096, NULL, 5, NULL);
+
+    oled_main();
     /* Initialize Wi-Fi. Note that, this should be called before esp_rmaker_node_init()
      */
     app_wifi_init();
@@ -160,3 +162,5 @@ void app_main()
         abort();
     }
 }
+
+

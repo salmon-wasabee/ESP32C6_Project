@@ -11,6 +11,9 @@
 
 #define I2S_NUM (I2S_NUM_0)
 
+double db = 0.0;
+char db_str[20]="";
+
 i2s_config_t i2s_config = {
     .mode = I2S_MODE_MASTER | I2S_MODE_RX,
     .sample_rate = 44100,
@@ -40,7 +43,7 @@ i2s_pin_config_t pin_config = {
 //     return client;
 // }
 
-double mic_main() {
+void mic_main() {
     // esp_http_client_handle_t client = init_http_client();
     i2s_driver_install(I2S_NUM, &i2s_config, 0, NULL);
     i2s_set_pin(I2S_NUM, &pin_config);
@@ -67,12 +70,11 @@ double mic_main() {
         if (sample_count >= i2s_config.sample_rate) {
             double rms = sqrt((double)sum_squares / sample_count);
             double db = 20 * log10(rms / 32768);  // Convert to decibels
-            printf("Sound level: %.2f dB\n", db);
-
+            sprintf(db_str, "%.2f", db);  // Convert db to a string
+            printf("(mic_test.c)Sound level: %s\n", db_str);
             // Reset the sum of squares and the sample count
             sum_squares = 0;
             sample_count = 0;
-            return db;
         }
         // // Send the audio data to a speech-to-text service
         // esp_http_client_set_url(client, "https://speech.googleapis.com/v1/speech:recognize");

@@ -1,7 +1,7 @@
 {
     "version":            "1.1",
     "project_name":       "bootloader",
-    "project_version":    "1",
+    "project_version":    "v5.2.1-dirty",
     "project_path":       "/Users/senggee/esp/esp-idf/components/bootloader/subproject",
     "idf_path":           "/Users/senggee/esp/esp-idf",
     "build_dir":          "/Users/senggee/esp/ESP32C6_Project/rainmaker_main_project/build/bootloader",
@@ -11,7 +11,7 @@
     "app_elf":            "bootloader.elf",
     "app_bin":            "bootloader.bin",
     "build_type":         "flash_app",
-    "git_revision":       "HEAD-HASH-NOTFOUND",
+    "git_revision":       "v5.2.1-dirty",
     "target":             "esp32c6",
     "rev":                "",
     "min_rev":            "0",

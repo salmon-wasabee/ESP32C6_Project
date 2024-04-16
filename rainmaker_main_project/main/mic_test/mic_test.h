@@ -13,6 +13,9 @@
 
 // char* extract_transcribed_text(char* response);
 // esp_http_client_handle_t init_http_client();
-double mic_main();
+extern double db;
+extern char db_str[20];
+void mic_main();
+
 
 #endif // MIC_TEST_H
