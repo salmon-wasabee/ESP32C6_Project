@@ -1,4 +1,4 @@
-# Install script for directory: /Users/senggee/esp/ESP32C6_Projects/project_2_mic_test/main
+# Install script for directory: /Users/senggee/esp/ESP32C6_Project/project_2_mic_test/main
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

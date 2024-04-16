@@ -1,7 +1,9 @@
 #include "jarvis_ui.h"
+#include "../mic_test/mic_test.h"
 
 void jarvis_ui(lv_disp_t *disp)
 {
+    double db = mic_main();
     // Set rotation to 180 degrees
     lv_disp_set_rotation(disp, LV_DISP_ROT_180);
 
@@ -24,12 +26,22 @@ void jarvis_ui(lv_disp_t *disp)
     // Create the second label (Secondary level)
     lv_obj_t *label3 = lv_label_create(scr);
     lv_label_set_long_mode(label3, LV_LABEL_LONG_CLIP); // Circular scroll
-    lv_label_set_text(label3, "Status: \nAll systems go"); // Additional static text
+    lv_label_set_text(label3, "Sound Level:"); // Additional static text
     lv_obj_set_width(label3, disp->driver->hor_res);
     lv_obj_align(label3, LV_ALIGN_TOP_MID, 0, 30); // Position it below the first label
+
+        // Create the second label (Secondary level)
+    lv_obj_t *label4 = lv_label_create(scr);
+    lv_label_set_long_mode(label4, LV_LABEL_LONG_CLIP); // Circular scroll
+    char db_str[20];
+    snprintf(db_str, sizeof(db_str), "%.2f", db);
+    lv_label_set_text(label4, db_str); // Additional static text
+    lv_obj_set_width(label4, disp->driver->hor_res);
+    lv_obj_align(label4, LV_ALIGN_TOP_MID, 0, 45); // Position it below the first label
 
     // Set a smaller font for the second label
     lv_obj_set_style_text_font(label1, &lv_font_montserrat_12, LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(label2, &lv_font_montserrat_12, LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(label3, &lv_font_montserrat_12, LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(label4, &lv_font_montserrat_12, LV_STATE_DEFAULT);
 }

@@ -1,6 +1,6 @@
 /*
  * Automatically generated file. DO NOT EDIT.
- * Espressif IoT Development Framework (ESP-IDF) 5.2.1 Configuration Header
+ * Espressif IoT Development Framework (ESP-IDF) 5.2.0 Configuration Header
  */
 #pragma once
 #define CONFIG_SOC_ADC_SUPPORTED 1
@@ -344,13 +344,12 @@
 #define CONFIG_SOC_BLE_MULTI_CONN_OPTIMIZATION 1
 #define CONFIG_SOC_BLE_USE_WIFI_PWR_CLK_WORKAROUND 1
 #define CONFIG_SOC_PHY_COMBO_MODULE 1
-#define CONFIG_SOC_CAPS_NO_RESET_BY_ANA_BOD 1
 #define CONFIG_IDF_CMAKE 1
 #define CONFIG_IDF_TOOLCHAIN "gcc"
 #define CONFIG_IDF_TARGET_ARCH_RISCV 1
 #define CONFIG_IDF_TARGET_ARCH "riscv"
 #define CONFIG_IDF_TARGET "esp32c6"
-#define CONFIG_IDF_INIT_VERSION "5.2.1"
+#define CONFIG_IDF_INIT_VERSION "5.2.0"
 #define CONFIG_IDF_TARGET_ESP32C6 1
 #define CONFIG_IDF_FIRMWARE_CHIP_ID 0x000D
 #define CONFIG_APP_BUILD_TYPE_APP_2NDBOOT 1

@@ -78,6 +78,9 @@ void app_main()
     }
     ESP_ERROR_CHECK( err );
     oled_main();
+    // Create the task to update the OLED screen
+    
+    // xTaskCreate(update_oled_task, "Update OLED Task", 2048, NULL, 5, NULL);
 
     /* Initialize Wi-Fi. Note that, this should be called before esp_rmaker_node_init()
      */
@@ -156,7 +159,4 @@ void app_main()
         vTaskDelay(5000/portTICK_PERIOD_MS);
         abort();
     }
-
-
-    mic_main();
 }

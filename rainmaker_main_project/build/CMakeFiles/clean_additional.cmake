@@ -14,7 +14,6 @@ if("${CONFIG}" STREQUAL "" OR "${CONFIG}" STREQUAL "")
   "flash_bootloader_args"
   "flash_project_args"
   "flasher_args.json"
-  "google_cloud_cert.pem.S"
   "https_server.crt.S"
   "ldgen_libraries"
   "ldgen_libraries.in"

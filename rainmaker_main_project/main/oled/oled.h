@@ -16,5 +16,6 @@
 
 static bool notify_lvgl_flush_ready(esp_lcd_panel_io_handle_t panel_io, esp_lcd_panel_io_event_data_t *edata, void *user_ctx);
 void oled_main(void);
+void update_oled_task(void *pvParameters);
 
 #endif // OLED_H
