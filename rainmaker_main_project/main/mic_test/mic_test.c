@@ -1,5 +1,5 @@
 #include "mic_test.h"
-
+//INMP441 
 
 // extern const uint8_t google_cloud_cert_pem_start[] asm("_binary_google_cloud_cert_pem_start");
 
@@ -11,14 +11,14 @@
 
 #define I2S_NUM (I2S_NUM_0)
 
-double db = 0.0;
+double db;
 char db_str[20];
 
 i2s_config_t i2s_config = {
     .mode = I2S_MODE_MASTER | I2S_MODE_RX,
     .sample_rate = 44100,
     .bits_per_sample = I2S_BITS_PER_SAMPLE_32BIT,
-    .channel_format = I2S_CHANNEL_FMT_ONLY_LEFT,
+    .channel_format = I2S_CHANNEL_FMT_ONLY_LEFT,  // Set to left channel
     .communication_format = I2S_COMM_FORMAT_STAND_I2S,  // Use the non-deprecated format
     .intr_alloc_flags = 0,
     .dma_buf_count = 8,
@@ -69,13 +69,16 @@ void mic_main() {
         // If one second has passed, calculate and print the sound level
         if (sample_count >= i2s_config.sample_rate) {
             double rms = sqrt((double)sum_squares / sample_count);
-            double db = 20 * log10(rms / 32768);  // Convert to decibels
+            // printf("(mic_test.c)rms: %f\n", rms);
+            double db = (90.0 * log10(rms / 32768.0)) - 105.0;  // Convert to decibels
             sprintf(db_str, "%.2f", db);  // Convert db to a string
-            printf("(mic_test.c)Sound level: %s\n", db_str);
+            // printf("(mic_test.c)Sound level: %s\n", db_str);
             // Reset the sum of squares and the sample count
             sum_squares = 0;
             sample_count = 0;
         }
+
+
         // // Send the audio data to a speech-to-text service
         // esp_http_client_set_url(client, "https://speech.googleapis.com/v1/speech:recognize");
         // esp_http_client_set_method(client, HTTP_METHOD_POST);
