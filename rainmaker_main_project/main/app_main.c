@@ -28,6 +28,7 @@
 #include "mic_test/mic_test.h"
 
 static const char *TAG = "app_main";
+TaskHandle_t mic_main_task_handle = NULL;
 
 esp_rmaker_device_t *switch_device;
 esp_rmaker_device_t *light_device;
@@ -63,6 +64,19 @@ static esp_err_t write_cb(const esp_rmaker_device_t *device, const esp_rmaker_pa
     return ESP_OK;
 }
 
+void monitor_task(void *pvParameters)
+{
+    while (1) {
+        UBaseType_t mic_main_high_water_mark = uxTaskGetStackHighWaterMark(mic_main_task_handle);
+
+        printf("Mic Main Task High Water Mark: %u\n", mic_main_high_water_mark);
+
+        vTaskDelay(pdMS_TO_TICKS(1000)); // delay for 1 second
+    }
+}
+
+
+
 
 void app_main()
 {
@@ -80,8 +94,13 @@ void app_main()
     }
     ESP_ERROR_CHECK( err );
 
-    // Starts Mic recording
-    xTaskCreate(mic_main, "mic_main_task", 4096, NULL, 5, NULL);
+    // // Starts Mic recording
+    // xTaskCreate(mic_main, "mic_main_task", 4096, NULL, 5, NULL);
+
+    
+
+    xTaskCreate(mic_main, "mic_main_task", 4096, NULL, 5, &mic_main_task_handle);
+    xTaskCreate(monitor_task, "monitor_task", 2048, NULL, 1, NULL);
 
     oled_main();
     /* Initialize Wi-Fi. Note that, this should be called before esp_rmaker_node_init()

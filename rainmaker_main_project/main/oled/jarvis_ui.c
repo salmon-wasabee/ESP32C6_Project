@@ -6,6 +6,8 @@ extern char db_str[20];
 char temp[50];
 char temp1[50];
 
+
+
 lv_obj_t *label3;
 lv_obj_t *label4;
 
@@ -96,7 +98,7 @@ void jarvis_ui(lv_disp_t *disp)
     lv_obj_set_style_text_font(label3, &lv_font_montserrat_12, LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(label4, &lv_font_montserrat_12, LV_STATE_DEFAULT);
 
-    xTaskCreate(update_label_task, "Update Label Task", 4096, NULL, 5, NULL);
-    xTaskCreate(update_label_task1, "Update Label Task 1", 4096, NULL, 5, NULL);
+    xTaskCreate(update_label_task, "Update Label Task", 10000, NULL, 10, NULL);
+    xTaskCreate(update_label_task1, "Update Label Task 1", 10000, NULL, 10, NULL);
 }
 

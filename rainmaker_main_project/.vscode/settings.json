@@ -1,12 +1,14 @@
 {
     "idf.flashType": "UART",
-    "idf.port": "/dev/cu.usbserial-6040",
+    "idf.port": "/dev/cu.usbserial-1420",
     "idf.adapterTargetName": "esp32c6",
     "idf.openOcdConfigs": [
         "board/esp32c6-bridge.cfg"
     ],
     "files.associations": {
         "app_priv.h": "c",
-        "mic_test.h": "c"
+        "mic_test.h": "c",
+        "oled.h": "c",
+        "cstdlib": "c"
     }
 }
