@@ -14,7 +14,8 @@
 #include "esp_lcd_panel_vendor.h"
 
 
+
 static bool notify_lvgl_flush_ready(esp_lcd_panel_io_handle_t panel_io, esp_lcd_panel_io_event_data_t *edata, void *user_ctx);
-void oled_main(void);
+void oled_main();
 
 #endif // OLED_H

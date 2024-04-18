@@ -3473,6 +3473,16 @@
         "children": [],
         "depends_on": null,
         "help": null,
+        "id": "SOC_CAPS_NO_RESET_BY_ANA_BOD",
+        "name": "SOC_CAPS_NO_RESET_BY_ANA_BOD",
+        "range": null,
+        "title": null,
+        "type": "bool"
+    },
+    {
+        "children": [],
+        "depends_on": null,
+        "help": null,
         "id": "IDF_CMAKE",
         "name": "IDF_CMAKE",
         "range": null,
@@ -3904,17 +3914,17 @@
                     },
                     {
                         "children": [],
-                        "depends_on": "<choice BOOTLOADER_COMPILER_OPTIMIZATION>",
+                        "depends_on": "(IDF_TARGET_ARCH_XTENSA || IDF_TARGET_ESP32C3 || IDF_TARGET_ESP32C2) && <choice BOOTLOADER_COMPILER_OPTIMIZATION>",
                         "help": null,
                         "id": "BOOTLOADER_COMPILER_OPTIMIZATION_NONE",
                         "name": "BOOTLOADER_COMPILER_OPTIMIZATION_NONE",
                         "range": null,
-                        "title": "Debug without optimization (-O0)",
+                        "title": "Debug without optimization (-O0) (Deprecated, will be removed in IDF v6.0)",
                         "type": "bool"
                     }
                 ],
                 "depends_on": null,
-                "help": "This option sets compiler optimization level (gcc -O argument)\nfor the bootloader.\n\n- The default \"Size\" setting will add the -0s flag to CFLAGS.\n- The \"Debug\" setting will add the -Og flag to CFLAGS.\n- The \"Performance\" setting will add the -O2 flag to CFLAGS.\n- The \"None\" setting will add the -O0 flag to CFLAGS.\n\nNote that custom optimization levels may be unsupported.",
+                "help": "This option sets compiler optimization level (gcc -O argument)\nfor the bootloader.\n\n- The default \"Size\" setting will add the -0s flag to CFLAGS.\n- The \"Debug\" setting will add the -Og flag to CFLAGS.\n- The \"Performance\" setting will add the -O2 flag to CFLAGS.\n\nNote that custom optimization levels may be unsupported.",
                 "id": "bootloader-config-bootloader-optimization-level",
                 "name": "BOOTLOADER_COMPILER_OPTIMIZATION",
                 "title": "Bootloader optimization Level",
@@ -4388,6 +4398,16 @@
             },
             {
                 "children": [
+                    {
+                        "children": [],
+                        "depends_on": "BOOTLOADER_CUSTOM_RESERVE_RTC",
+                        "help": "This option allows the customer to use the legacy bootloader behavior when the\nRTC FAST memory CRC calculation takes place. When this option is enabled, the\nallocated user custom data will be taken into account in the CRC calculcation.\nThis means that any change to the custom data would need a CRC update to prevent\nthe bootloader from marking this data as corrupted.\nIf this option is disabled, the custom data will not be taken into account when\ncalculating the RTC FAST memory CRC. The user custom data can be changed freely,\nwithout the need to update the CRC.\nTHIS OPTION MUST BE THE SAME FOR BOTH THE BOOTLOADER AND THE APPLICATION BUILDS.",
+                        "id": "BOOTLOADER_CUSTOM_RESERVE_RTC_IN_CRC",
+                        "name": "BOOTLOADER_CUSTOM_RESERVE_RTC_IN_CRC",
+                        "range": null,
+                        "title": "Include custom memory in the CRC calculation",
+                        "type": "bool"
+                    },
                     {
                         "children": [],
                         "depends_on": "BOOTLOADER_CUSTOM_RESERVE_RTC",
@@ -4985,6 +5005,16 @@
                 "id": "security-features-potentially-insecure-options",
                 "title": "Potentially insecure options",
                 "type": "menu"
+            },
+            {
+                "children": [],
+                "depends_on": "SECURE_FLASH_ENC_ENABLED && !SECURE_FLASH_REQUIRE_ALREADY_ENABLED",
+                "help": "If set, optimise encryption time for the partition of type APP,\nby only encrypting the app image that is present in the partition,\ninstead of the whole partition.\nThe image length used for encryption is derived from the image metadata, which\nincludes the size of the app image, checksum, hash and also the signature sector\nwhen secure boot is enabled.\n\nIf not set (default), the whole partition of type APP would be encrypted,\nwhich increases the encryption time but might be useful if there\nis any custom data appended to the firmware image.",
+                "id": "SECURE_FLASH_ENCRYPT_ONLY_IMAGE_LEN_IN_APP_PART",
+                "name": "SECURE_FLASH_ENCRYPT_ONLY_IMAGE_LEN_IN_APP_PART",
+                "range": null,
+                "title": "Encrypt only the app image that is present in the partition of type app",
+                "type": "bool"
             },
             {
                 "children": [],

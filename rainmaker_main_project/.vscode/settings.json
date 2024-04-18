@@ -1,9 +1,9 @@
 {
     "idf.flashType": "UART",
-    "idf.port": "/dev/cu.usbserial-1420",
+    "idf.port": "/dev/cu.usbserial-6040",
     "idf.adapterTargetName": "esp32c6",
     "idf.openOcdConfigs": [
-        "board/esp32c6-bridge.cfg"
+        "board/esp32c6-ftdi.cfg"
     ],
     "files.associations": {
         "app_priv.h": "c",

@@ -24,7 +24,7 @@ static bool notify_lvgl_flush_ready(esp_lcd_panel_io_handle_t panel_io, esp_lcd_
     return false;
 }
 
-void oled_main(void)
+void oled_main()
 {
     ESP_LOGI(TAG, "Initialize I2C bus");
     i2c_config_t i2c_conf = {

@@ -1,0 +1,86 @@
+-- Component directory /Users/senggee/esp/components/esp-insights does not contain a CMakeLists.txt file. No component will be added
+-- The C compiler identification is GNU 13.2.0
+-- The CXX compiler identification is GNU 13.2.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /Users/senggee/.espressif/tools/riscv32-esp-elf/esp-13.2.0_20230928/riscv32-esp-elf/bin/riscv32-esp-elf-gcc
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /Users/senggee/.espressif/tools/riscv32-esp-elf/esp-13.2.0_20230928/riscv32-esp-elf/bin/riscv32-esp-elf-gcc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /Users/senggee/.espressif/tools/riscv32-esp-elf/esp-13.2.0_20230928/riscv32-esp-elf/bin/riscv32-esp-elf-g++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Building ESP-IDF components for target esp32c6
+Dependency "espressif/rmaker_common (1.4.3)" version has changed from 1.4.3 to 1.4.2, solving dependencies.
+Using component placed at /Users/senggee/esp/components/esp-insights/components/rmaker_common for dependency espressif/rmaker_common(~1.4.0)(introduced by component esp_diagnostics)
+Using component placed at /Users/senggee/esp/components/esp-insights/components/esp_diag_data_store for dependency espressif/esp_diag_data_store(~1.0)(introduced by component esp_insights)
+Using component placed at /Users/senggee/esp/components/esp-insights/components/esp_diagnostics for dependency espressif/esp_diagnostics(~1.0)(introduced by component esp_insights)
+Using component placed at /Users/senggee/esp/components/esp-insights/components/rmaker_common for dependency espressif/rmaker_common(~1.4.0)(introduced by component esp_insights)
+Using component placed at /Users/senggee/esp/components/esp_schedule for dependency espressif/esp_schedule(~1.1.0)(introduced by component esp_rainmaker)
+Using component placed at /Users/senggee/esp/components/json_generator for dependency espressif/json_generator(~1.1.1)(introduced by component esp_rainmaker)
+Using component placed at /Users/senggee/esp/components/json_parser for dependency espressif/json_parser(~1.0.3)(introduced by component esp_rainmaker)
+Using component placed at /Users/senggee/esp/components/esp-insights/components/rmaker_common for dependency espressif/rmaker_common(~1.4.2)(introduced by component esp_rainmaker)
+Using component placed at /Users/senggee/esp/components/esp-insights/components/rmaker_common for dependency espressif/rmaker_common(~1.4.2)(introduced by component esp_schedule)
+Using component placed at /Users/senggee/esp/components/jsmn for dependency espressif/jsmn(~1.1)(introduced by component json_parser)
+.Using component placed at /Users/senggee/esp/components/esp-insights/components/rmaker_common for dependency espressif/rmaker_common(~1.4.0), specified in /Users/senggee/esp/components/esp-insights/components/esp_diagnostics/idf_component.yml
+.Using component placed at /Users/senggee/esp/components/esp-insights/components/esp_diag_data_store for dependency espressif/esp_diag_data_store(~1.0), specified in /Users/senggee/esp/components/esp-insights/components/esp_insights/idf_component.yml
+Using component placed at /Users/senggee/esp/components/esp-insights/components/esp_diagnostics for dependency espressif/esp_diagnostics(~1.0), specified in /Users/senggee/esp/components/esp-insights/components/esp_insights/idf_component.yml
+Using component placed at /Users/senggee/esp/components/esp-insights/components/rmaker_common for dependency espressif/rmaker_common(~1.4.0), specified in /Users/senggee/esp/components/esp-insights/components/esp_insights/idf_component.yml
+...Using component placed at /Users/senggee/esp/components/esp-insights/components/rmaker_common for dependency espressif/rmaker_common(~1.4.0)(introduced by component espressif/esp_diagnostics), specified in /Users/senggee/esp/components/esp-insights/components/esp_insights/idf_component.yml
+..Using component placed at /Users/senggee/esp/components/lvgl for dependency lvgl/lvgl(^8), specified in /Users/senggee/esp/components/esp_lvgl_port/idf_component.yml
+....Using component placed at /Users/senggee/esp/components/esp_schedule for dependency espressif/esp_schedule(~1.1.0), specified in /Users/senggee/esp/components/esp_rainmaker/idf_component.yml
+Using component placed at /Users/senggee/esp/components/json_generator for dependency espressif/json_generator(~1.1.1), specified in /Users/senggee/esp/components/esp_rainmaker/idf_component.yml
+Using component placed at /Users/senggee/esp/components/json_parser for dependency espressif/json_parser(~1.0.3), specified in /Users/senggee/esp/components/esp_rainmaker/idf_component.yml
+Using component placed at /Users/senggee/esp/components/esp-insights/components/rmaker_common for dependency espressif/rmaker_common(~1.4.2), specified in /Users/senggee/esp/components/esp_rainmaker/idf_component.yml
+Using component placed at /Users/senggee/esp/components/esp-insights/components/rmaker_common for dependency espressif/rmaker_common(~1.4.2)(introduced by component espressif/esp_schedule), specified in /Users/senggee/esp/components/esp_rainmaker/idf_component.yml
+....Using component placed at /Users/senggee/esp/components/jsmn for dependency espressif/jsmn(~1.1)(introduced by component espressif/json_parser), specified in /Users/senggee/esp/components/esp_rainmaker/idf_component.yml
+...Using component placed at /Users/senggee/esp/components/esp-insights/components/rmaker_common for dependency espressif/rmaker_common(~1.4.2), specified in /Users/senggee/esp/components/esp_schedule/idf_component.yml
+.Using component placed at /Users/senggee/esp/components/jsmn for dependency espressif/jsmn(~1.1), specified in /Users/senggee/esp/components/json_parser/idf_component.yml
+.Using component placed at /Users/senggee/esp/components/esp-insights/components/esp_insights for dependency espressif/esp_insights(~1.0.1), specified in /Users/senggee/esp/ESP32C6_Project/common/app_insights/idf_component.yml
+Using component placed at /Users/senggee/esp/components/esp_rainmaker for dependency espressif/esp_rainmaker(~=1.0), specified in /Users/senggee/esp/ESP32C6_Project/common/app_insights/idf_component.yml
+Using component placed at /Users/senggee/esp/components/esp-insights/components/esp_diag_data_store for dependency espressif/esp_diag_data_store(~1.0)(introduced by component espressif/esp_insights), specified in /Users/senggee/esp/ESP32C6_Project/common/app_insights/idf_component.yml
+Using component placed at /Users/senggee/esp/components/esp-insights/components/esp_diagnostics for dependency espressif/esp_diagnostics(~1.0)(introduced by component espressif/esp_insights), specified in /Users/senggee/esp/ESP32C6_Project/common/app_insights/idf_component.yml
+Using component placed at /Users/senggee/esp/components/esp-insights/components/rmaker_common for dependency espressif/rmaker_common(~1.4.0)(introduced by component espressif/esp_insights), specified in /Users/senggee/esp/ESP32C6_Project/common/app_insights/idf_component.yml
+.Using component placed at /Users/senggee/esp/components/esp_schedule for dependency espressif/esp_schedule(~1.1.0)(introduced by component espressif/esp_rainmaker), specified in /Users/senggee/esp/ESP32C6_Project/common/app_insights/idf_component.yml
+Using component placed at /Users/senggee/esp/components/json_generator for dependency espressif/json_generator(~1.1.1)(introduced by component espressif/esp_rainmaker), specified in /Users/senggee/esp/ESP32C6_Project/common/app_insights/idf_component.yml
+Using component placed at /Users/senggee/esp/components/json_parser for dependency espressif/json_parser(~1.0.3)(introduced by component espressif/esp_rainmaker), specified in /Users/senggee/esp/ESP32C6_Project/common/app_insights/idf_component.yml
+Using component placed at /Users/senggee/esp/components/esp-insights/components/rmaker_common for dependency espressif/rmaker_common(~1.4.2)(introduced by component espressif/esp_rainmaker), specified in /Users/senggee/esp/ESP32C6_Project/common/app_insights/idf_component.yml
+.Updating lock file at /Users/senggee/esp/ESP32C6_Project/rainmaker_main_project/dependencies.lock
+Processing 5 dependencies:
+[1/5] espressif/cbor (0.6.0~1)
+[2/5] espressif/esp_lcd_touch (1.1.1)
+[3/5] espressif/esp_secure_cert_mgr (2.4.1)
+[4/5] espressif/mdns (1.3.0)
+[5/5] idf (5.2.1)
+-- Project sdkconfig file /Users/senggee/esp/ESP32C6_Project/rainmaker_main_project/sdkconfig
+Loading defaults file /Users/senggee/esp/ESP32C6_Project/rainmaker_main_project/sdkconfig.defaults...
+/Users/senggee/esp/ESP32C6_Project/rainmaker_main_project/sdkconfig.defaults:29 CONFIG_ESP_RMAKER_LOCAL_CTRL_ENABLE was replaced with CONFIG_ESP_RMAKER_LOCAL_CTRL_AUTO_ENABLE
+/var/folders/vt/wqv3b5y93x1btx57r3xzv2rm0000gn/T/kconfgen_tmpb3mtyp0s:2 line was updated to CONFIG_PARTITION_TABLE_SINGLE_APP=n
+/var/folders/vt/wqv3b5y93x1btx57r3xzv2rm0000gn/T/kconfgen_tmpb3mtyp0s:3 line was updated to CONFIG_PARTITION_TABLE_TWO_OTA=n
+Loading defaults file /Users/senggee/esp/ESP32C6_Project/rainmaker_main_project/sdkconfig.defaults.esp32c6...
+-- App "multi_device" version: 1.0
+-- Adding linker script /Users/senggee/esp/ESP32C6_Project/rainmaker_main_project/build/esp-idf/esp_system/ld/memory.ld
+-- Adding linker script /Users/senggee/esp/esp-idf/components/esp_system/ld/esp32c6/sections.ld.in
+-- Adding linker script /Users/senggee/esp/esp-idf/components/esp_rom/esp32c6/ld/esp32c6.rom.ld
+-- Adding linker script /Users/senggee/esp/esp-idf/components/esp_rom/esp32c6/ld/esp32c6.rom.api.ld
+-- Adding linker script /Users/senggee/esp/esp-idf/components/esp_rom/esp32c6/ld/esp32c6.rom.rvfp.ld
+-- Adding linker script /Users/senggee/esp/esp-idf/components/esp_rom/esp32c6/ld/esp32c6.rom.newlib.ld
+-- Adding linker script /Users/senggee/esp/esp-idf/components/esp_rom/esp32c6/ld/esp32c6.rom.version.ld
+-- Adding linker script /Users/senggee/esp/esp-idf/components/esp_rom/esp32c6/ld/esp32c6.rom.phy.ld
+-- Adding linker script /Users/senggee/esp/esp-idf/components/esp_rom/esp32c6/ld/esp32c6.rom.coexist.ld
+-- Adding linker script /Users/senggee/esp/esp-idf/components/esp_rom/esp32c6/ld/esp32c6.rom.net80211.ld
+-- Adding linker script /Users/senggee/esp/esp-idf/components/esp_rom/esp32c6/ld/esp32c6.rom.pp.ld
+-- Adding linker script /Users/senggee/esp/esp-idf/components/esp_rom/esp32c6/ld/esp32c6.rom.wdt.ld
+-- Adding linker script /Users/senggee/esp/esp-idf/components/esp_rom/esp32c6/ld/esp32c6.rom.newlib-normal.ld
+-- Adding linker script /Users/senggee/esp/esp-idf/components/esp_rom/esp32c6/ld/esp32c6.rom.heap.ld
+-- Adding linker script /Users/senggee/esp/esp-idf/components/soc/esp32c6/ld/esp32c6.peripherals.ld
+-- git rev-parse returned 'fatal: not a git repository (or any of the parent directories): .git'
+-- git rev-parse returned 'fatal: not a git repository (or any of the parent directories): .git'
+-- Components: app_insights app_reset app_trace app_update app_wifi bootloader bootloader_support bt cmock console cxx driver efuse esp-tls esp_adc esp_app_format esp_bootloader_format esp_coex esp_common esp_diag_data_store esp_diagnostics esp_eth esp_event esp_gdbstub esp_hid esp_http_client esp_http_server esp_https_ota esp_https_server esp_hw_support esp_insights esp_lcd esp_lcd_sh1107 esp_local_ctrl esp_lvgl_port esp_mm esp_netif esp_netif_stack esp_partition esp_phy esp_pm esp_psram esp_rainmaker esp_ringbuf esp_rom esp_schedule esp_system esp_timer esp_wifi espcoredump espressif__cbor espressif__esp_lcd_touch espressif__esp_secure_cert_mgr espressif__mdns esptool_py fatfs freertos gpio_button hal heap http_parser idf_test ieee802154 jsmn json json_generator json_parser log lvgl lwip main mbedtls mqtt newlib nvs_flash nvs_sec_provider openthread partition_table protobuf-c protocomm pthread qrcode riscv rmaker_common sdmmc soc spi_flash spiffs tcp_transport ulp unity usb vfs wear_levelling wifi_provisioning wpa_supplicant ws2812_led
+-- Component paths: /Users/senggee/esp/ESP32C6_Project/common/app_insights /Users/senggee/esp/ESP32C6_Project/common/app_reset /Users/senggee/esp/esp-idf/components/app_trace /Users/senggee/esp/esp-idf/components/app_update /Users/senggee/esp/ESP32C6_Project/common/app_wifi /Users/senggee/esp/esp-idf/components/bootloader /Users/senggee/esp/esp-idf/components/bootloader_support /Users/senggee/esp/esp-idf/components/bt /Users/senggee/esp/esp-idf/components/cmock /Users/senggee/esp/esp-idf/components/console /Users/senggee/esp/esp-idf/components/cxx /Users/senggee/esp/esp-idf/components/driver /Users/senggee/esp/esp-idf/components/efuse /Users/senggee/esp/esp-idf/components/esp-tls /Users/senggee/esp/esp-idf/components/esp_adc /Users/senggee/esp/esp-idf/components/esp_app_format /Users/senggee/esp/esp-idf/components/esp_bootloader_format /Users/senggee/esp/esp-idf/components/esp_coex /Users/senggee/esp/esp-idf/components/esp_common /Users/senggee/esp/components/esp-insights/components/esp_diag_data_store /Users/senggee/esp/components/esp-insights/components/esp_diagnostics /Users/senggee/esp/esp-idf/components/esp_eth /Users/senggee/esp/esp-idf/components/esp_event /Users/senggee/esp/esp-idf/components/esp_gdbstub /Users/senggee/esp/esp-idf/components/esp_hid /Users/senggee/esp/esp-idf/components/esp_http_client /Users/senggee/esp/esp-idf/components/esp_http_server /Users/senggee/esp/esp-idf/components/esp_https_ota /Users/senggee/esp/esp-idf/components/esp_https_server /Users/senggee/esp/esp-idf/components/esp_hw_support /Users/senggee/esp/components/esp-insights/components/esp_insights /Users/senggee/esp/esp-idf/components/esp_lcd /Users/senggee/esp/components/esp_lcd_sh1107 /Users/senggee/esp/esp-idf/components/esp_local_ctrl /Users/senggee/esp/components/esp_lvgl_port /Users/senggee/esp/esp-idf/components/esp_mm /Users/senggee/esp/esp-idf/components/esp_netif /Users/senggee/esp/esp-idf/components/esp_netif_stack /Users/senggee/esp/esp-idf/components/esp_partition /Users/senggee/esp/esp-idf/components/esp_phy /Users/senggee/esp/esp-idf/components/esp_pm /Users/senggee/esp/esp-idf/components/esp_psram /Users/senggee/esp/components/esp_rainmaker /Users/senggee/esp/esp-idf/components/esp_ringbuf /Users/senggee/esp/esp-idf/components/esp_rom /Users/senggee/esp/components/esp_schedule /Users/senggee/esp/esp-idf/components/esp_system /Users/senggee/esp/esp-idf/components/esp_timer /Users/senggee/esp/esp-idf/components/esp_wifi /Users/senggee/esp/esp-idf/components/espcoredump /Users/senggee/esp/ESP32C6_Project/rainmaker_main_project/managed_components/espressif__cbor /Users/senggee/esp/ESP32C6_Project/rainmaker_main_project/managed_components/espressif__esp_lcd_touch /Users/senggee/esp/ESP32C6_Project/rainmaker_main_project/managed_components/espressif__esp_secure_cert_mgr /Users/senggee/esp/ESP32C6_Project/rainmaker_main_project/managed_components/espressif__mdns /Users/senggee/esp/esp-idf/components/esptool_py /Users/senggee/esp/esp-idf/components/fatfs /Users/senggee/esp/esp-idf/components/freertos /Users/senggee/esp/ESP32C6_Project/common/gpio_button /Users/senggee/esp/esp-idf/components/hal /Users/senggee/esp/esp-idf/components/heap /Users/senggee/esp/esp-idf/components/http_parser /Users/senggee/esp/esp-idf/components/idf_test /Users/senggee/esp/esp-idf/components/ieee802154 /Users/senggee/esp/components/jsmn /Users/senggee/esp/esp-idf/components/json /Users/senggee/esp/components/json_generator /Users/senggee/esp/components/json_parser /Users/senggee/esp/esp-idf/components/log /Users/senggee/esp/components/lvgl /Users/senggee/esp/esp-idf/components/lwip /Users/senggee/esp/ESP32C6_Project/rainmaker_main_project/main /Users/senggee/esp/esp-idf/components/mbedtls /Users/senggee/esp/esp-idf/components/mqtt /Users/senggee/esp/esp-idf/components/newlib /Users/senggee/esp/esp-idf/components/nvs_flash /Users/senggee/esp/esp-idf/components/nvs_sec_provider /Users/senggee/esp/esp-idf/components/openthread /Users/senggee/esp/esp-idf/components/partition_table /Users/senggee/esp/esp-idf/components/protobuf-c /Users/senggee/esp/esp-idf/components/protocomm /Users/senggee/esp/esp-idf/components/pthread /Users/senggee/esp/ESP32C6_Project/common/qrcode /Users/senggee/esp/esp-idf/components/riscv /Users/senggee/esp/components/rmaker_common /Users/senggee/esp/esp-idf/components/sdmmc /Users/senggee/esp/esp-idf/components/soc /Users/senggee/esp/esp-idf/components/spi_flash /Users/senggee/esp/esp-idf/components/spiffs /Users/senggee/esp/esp-idf/components/tcp_transport /Users/senggee/esp/esp-idf/components/ulp /Users/senggee/esp/esp-idf/components/unity /Users/senggee/esp/esp-idf/components/usb /Users/senggee/esp/esp-idf/components/vfs /Users/senggee/esp/esp-idf/components/wear_levelling /Users/senggee/esp/esp-idf/components/wifi_provisioning /Users/senggee/esp/esp-idf/components/wpa_supplicant /Users/senggee/esp/ESP32C6_Project/common/ws2812_led
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/senggee/esp/ESP32C6_Project/rainmaker_main_project/build
